@@ -65,6 +65,7 @@ static uint16_t rx_queues_per_port = 0;
 static uint16_t global_payload_size = MAX_PAYLOAD_SIZE;
 static uint32_t global_pause_calls = DEFAULT_PAUSE_CALLS;  // Number of rte_pause() calls per loop
 static int global_show_per_port_stats = 0;
+static int global_vary_src_ip = 0;
 
 // lcore role assignments
 static uint16_t global_tx_lcores[RTE_MAX_LCORE];
@@ -294,6 +295,7 @@ static void print_usage(const char *prog) {
     printf("  -s, --src-ip IP      Per-TX-port Source IP. \n");
     printf("  -d, --tx-dst-ip IP   Per-TX-port Destination IP.\n");
     printf("      --dst-mac MAC    Per-TX-port destination Ethernet MAC (repeat; skips ARP).\n");
+    printf("      --vary-src-ip   Give each TX worker a distinct outer source IP and inner UDP source port.\n");
     printf("  -z, --size SIZE      Payload size in bytes (max: %d)\n", MAX_PAYLOAD_SIZE);
     printf("  -a, --device DEVICE  Device to use (can specify multiple times)\n");
     printf("  -l, --lcores LCORES  Logical cores to use (e.g., 0-3, 0,2,4)\n");
@@ -466,8 +468,10 @@ static int packet_worker(__rte_unused void *dummy) {
             if (!m) break;
             struct in_addr src_ip_i = global_tx_src_addrs[port_id];
             struct in_addr dst_ip_i = global_tx_dst_addrs[port_id];
+            if (global_vary_src_ip)
+                src_ip_i.s_addr = rte_cpu_to_be_32(rte_be_to_cpu_32(src_ip_i.s_addr) + rank);
 
-            uint16_t udp_src_port = (uint16_t)(DEFAULT_SRC_PORT + port_queue_id);
+            uint16_t udp_src_port = (uint16_t)(DEFAULT_SRC_PORT + (global_vary_src_ip ? rank : port_queue_id));
 
             int ret = 0;
             if (use_esp) {
@@ -600,6 +604,7 @@ int main(int argc, char **argv) {
         {"salt", required_argument, 0, 1003},
         {"iv", required_argument, 0, 1004},
         {"dst-mac", required_argument, 0, 1006},
+        {"vary-src-ip", no_argument, 0, 1007},
         {"mbufs", required_argument, 0, 'M'},
         {"per-port-stats", no_argument, 0, 'S'},
         {0, 0, 0, 0}
@@ -683,6 +688,9 @@ int main(int argc, char **argv) {
                 break;
             case 1004: // --iv
                 if (per_tx_iv_count < 64) per_tx_ivs[per_tx_iv_count++] = optarg;
+                break;
+            case 1007: // --vary-src-ip
+                global_vary_src_ip = 1;
                 break;
             case 1006: // --dst-mac
                 if (per_tx_dst_mac_count < 64) per_tx_dst_macs[per_tx_dst_mac_count++] = optarg;

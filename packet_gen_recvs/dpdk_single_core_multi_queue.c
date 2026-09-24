@@ -316,7 +316,7 @@ static int packet_worker(__rte_unused void *dummy) {
                 rte_pktmbuf_free(m);
                 break;
             }
-            pending[BATCH_SIZE - pending_count - 1] = m;
+            pending[pending_count] = m;
             pending_count++;
         }
 
@@ -325,6 +325,10 @@ static int packet_worker(__rte_unused void *dummy) {
         if (pending_count > 0) {
             sent = rte_eth_tx_burst(port_id, current_queue_id, pending, pending_count);
             pending_count -= sent;
+            // Only the unsent tail remains owned by this worker.
+            if (sent > 0 && pending_count > 0) {
+                memmove(pending, pending + sent, pending_count * sizeof(*pending));
+            }
 
             // Round-robin to next queue
             current_queue_id++;

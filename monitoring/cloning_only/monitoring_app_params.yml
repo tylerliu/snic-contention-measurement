@@ -1,0 +1,24 @@
+#
+# Sample Monitoring App configuration for the new YAML parser.
+#
+program_flags:
+  monitor-devices: 
+    - "03:00.0,dv_flow_en=2"
+    - "03:00.1,dv_flow_en=2"
+  host-reps: 
+    - "pf0hpf,dv_flow_en=2"
+    - "pf1hpf,dv_flow_en=2"
+  monitor-udp-port: 3333
+  main-dest: rss
+  clone-dest: drop
+  disable-mirroring: false
+  enable-counters: true
+  log-level: INFO
+
+dpdk_args:
+  # Additional DPDK (EAL) flags if required
+  # Use single-letter keys for short options, or full names for long options
+  devices:
+    - ""
+  l: "0-2" # main lcore 0, with two DPDK queue lcores
+

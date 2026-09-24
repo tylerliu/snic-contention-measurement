@@ -1,0 +1,105 @@
+{
+  "XTS-Decrypt-Network-Load": {
+    "jobs": [
+      {
+        "name": "crypto",
+        "type": "crypto",
+        "host": "soc",
+        "case": "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt",
+        "params_override": {
+          "pause_loops": [
+            0
+          ]
+        },
+        "core": 3
+      },
+      {
+        "name": "network",
+        "type": "network",
+        "host": "localhost",
+        "case": "Host-to-Net-1472B",
+        "params_override": {
+          "throttles": [
+            1,
+            100,
+            200,
+            300,
+            400,
+            800,
+            1600,
+            6400
+          ]
+        }
+      }
+    ],
+    "duration": 10
+  },
+  "XTS-Decrypt-Network-Cloned-Load": {
+    "jobs": [
+      {
+        "name": "crypto",
+        "type": "crypto",
+        "host": "soc",
+        "case": "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt",
+        "params_override": {
+          "pause_loops": [
+            100,
+            400,
+            1600,
+            6400,
+            25600
+          ]
+        },
+        "core": 3
+      },
+      {
+        "name": "network",
+        "type": "network",
+        "host": "localhost",
+        "case": "Net-to-Host-1472B-Cloned",
+        "params_override": {
+          "throttles": [
+            1,
+            100,
+            200,
+            300,
+            400,
+            800,
+            1600
+          ]
+        }
+      }
+    ],
+    "duration": 10
+  },
+  "Host-to-Net-DPA-Memop": {
+    "jobs": [
+      {
+        "name": "network",
+        "type": "network",
+        "host": "localhost",
+        "case": "Host-to-Net-1472B",
+        "params_override": {
+          "throttles": [
+            1,
+            100,
+            200,
+            300,
+            400,
+            800,
+            1600,
+            6400
+          ]
+        }
+      },
+      {
+        "name": "dpa_memop",
+        "type": "command",
+        "host": "soc",
+        "cmd": "sudo /home/ubuntu/dpa-mapreduce/build/host/flexio_packet_processor -threads 256 -mem_size 262144 --op read --loop 128 --continuous",
+        "stop_signal": "SIGINT"
+      }
+    ],
+    "duration": 15
+  }
+}

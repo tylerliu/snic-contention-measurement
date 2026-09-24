@@ -5,8 +5,8 @@ This application measures Host–ARM communication using the DOCA Comm Channel (
 ## Description
 
 The application establishes a connection between the Host and the ARM endpoint on the DPU.
-- The Host acts as the **Server**.
-- The DPU acts as the **Client**.
+- ARM acts as the transport **Server**.
+- The Host acts as the transport **Client** and selects the workload parameters.
 
 Once connected, both sides exchange messages to measure performance.
 - **Producer**: Sends messages.
@@ -16,14 +16,16 @@ Build and Host–ARM setup instructions are in the [repository guide](../README.
 
 ## Usage
 
-### Host
+Run from `secure-channel-tester/`. Start the ARM server first, then the Host client.
+
+### ARM server
 ```bash
-./doca_secure_channel -p <PCI_ADDRESS> -n <NUM_MSGS> -s <MSG_SIZE>
+sudo ./build/doca_secure_channel -p <PCI_ADDRESS> -r <REP_PCI_ADDRESS>
 ```
 
-### DPU
+### Host client
 ```bash
-./doca_secure_channel -p <PCI_ADDRESS> -r <REP_PCI_ADDRESS>
+sudo ./build/doca_secure_channel -p <PCI_ADDRESS> -n <NUM_MSGS> -s <MSG_SIZE>
 ```
 
 ### Arguments
@@ -42,7 +44,7 @@ The application reports the following statistics upon completion:
 - **Total Messages**: Number of messages sent/received.
 - **Duration**: Total time taken for the operation.
 - **Throughput**: Measured in Messages per Second (Msgs/s).
-- **Bandwidth**: Measured in Megabytes per Second (MB/s).
+- **Bandwidth**: Measured in MiB/s (printed as `MB/s`).
 
 Bandwidth is computed in MiB/s (1024² bytes/s), although the log label is `MB/s`.
 

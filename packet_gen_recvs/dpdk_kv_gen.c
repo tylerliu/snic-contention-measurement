@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <errno.h>
 #include <arpa/inet.h>
 #include <rte_eal.h>
 #include <rte_ethdev.h>
@@ -41,6 +42,8 @@ static uint16_t global_dest_port_2 = 0;
 static uint32_t global_port_prob_threshold = 0; // 0 means 0% for port 2, UINT32_MAX means ~100%
 static uint16_t global_udp_src_port_base = DEFAULT_SRC_PORT;
 static uint16_t global_ports_per_flow = 1;
+static int global_dpa_rx_127_buckets = 0;
+static int global_dpa_rx_254_buckets = 0;
 // VXLAN variables removed
 static uint16_t *global_tx_port_ids = NULL;
 static uint16_t global_num_tx_ports = 0;
@@ -189,6 +192,7 @@ static void print_usage(const char *prog) {
     printf("                       <fraction>: 0.0-1.0 probability of choosing port2.\n");
     printf("  -s, --src-ip IP      Per-TX-port Source IP. \n");
     printf("  -d, --tx-dst-ip IP   Per-TX-port Destination IP.\n");
+    printf("      --dst-mac MAC   Optional unicast MAC; repeat in TX-device order, bypass ARP.\n");
     printf("  -z, --size SIZE      Payload size in bytes (max: %d)\n", MAX_PAYLOAD_SIZE);
     printf("  -a, --device DEVICE  Device to use (can specify multiple times)\n");
     printf("  -l, --lcores LCORES  Logical cores to use (e.g., 0-3, 0,2,4)\n");
@@ -199,6 +203,10 @@ static void print_usage(const char *prog) {
     printf("      --rx-ip IP       Per-RX-port IP (repeat in --rx-device order).\n");
     printf("      --udp-src-port P Base UDP source port (default: %d)\n", DEFAULT_SRC_PORT);
     printf("      --udp-src-port-count N Number of source ports per flow (default: 1)\n");
+    printf("      --dpa-rx-127-buckets Cycle buckets 0..126 on every TX queue; overrides queue-local source-port-count mapping\n");
+    printf("                           Requires a source-port base aligned to 128; omit --udp-src-port-count\n");
+    printf("      --dpa-rx-254-buckets Cycle all 65024 source ports: low-byte buckets 0..253 and all 256 upper-byte keys\n");
+    printf("                           Requires base aligned to 256; omit --udp-src-port-count; incompatible with 127 mode\n");
     printf("      --flow-count N   Number of flows (default: 1). Flows are interleaved.\n");
     printf("      --reflector-device DEV  Device to use as a reflector (swaps MAC/IP and reflects)\n");
     printf("  -M, --mbufs N        Number of mbufs in pool (default 65536)\n");
@@ -315,6 +323,13 @@ static int packet_worker(__rte_unused void *dummy) {
     printf("Worker thread %u started on core %u using port %u queue %u\n",
            rte_lcore_id(), rte_get_next_lcore(-1, 1, 0), port_id, port_queue_id);
     uint32_t pkt_counter = 0;
+    uint8_t dpa_bucket_cursor = tx_queues_per_port
+        ? (127U * port_queue_id) / tx_queues_per_port : 0;
+
+    uint32_t dpa254_rank = tx_queues_per_port
+        ? (65024U * port_queue_id) / tx_queues_per_port : 0;
+    uint16_t dpa_source_port_cursor = global_udp_src_port_base
+        + ((dpa254_rank / 254U) << 8) + dpa254_rank % 254U;
 
     // Key Rotation State
     uint64_t current_batch_key = (uint64_t)rte_rand() & 0xFFFFFFFFFFFF;
@@ -342,7 +357,11 @@ static int packet_worker(__rte_unused void *dummy) {
             }
 
             uint32_t variant_idx = pkt_counter++ % global_ports_per_flow;
-            uint16_t udp_src_port = global_udp_src_port_base + port_queue_id * global_ports_per_flow + variant_idx;
+            uint16_t udp_src_port = global_dpa_rx_254_buckets
+                ? dpa_source_port_cursor
+                : global_dpa_rx_127_buckets
+                ? global_udp_src_port_base + dpa_bucket_cursor
+                : global_udp_src_port_base + port_queue_id * global_ports_per_flow + variant_idx;
 
             uint16_t current_dest_port = global_dest_port;
             if (global_dest_port_2 != 0 && global_port_prob_threshold > 0) {
@@ -364,6 +383,12 @@ static int packet_worker(__rte_unused void *dummy) {
                                       udp_src_port, current_batch_key) != 0) {
                 rte_pktmbuf_free(m);
                 break;
+            }
+            if (global_dpa_rx_254_buckets) {
+                if ((++dpa_source_port_cursor & 0xff) == 254) dpa_source_port_cursor += 2;
+            }
+            if (global_dpa_rx_127_buckets) {
+                if (++dpa_bucket_cursor == 127) dpa_bucket_cursor = 0;
             }
             pending[BATCH_SIZE - pending_count - 1] = m;
             pending_count++;
@@ -393,11 +418,14 @@ int main(int argc, char **argv) {
     // Per-TX device overrides
     const char *per_tx_src_ips[64]; memset(per_tx_src_ips, 0, sizeof(per_tx_src_ips)); uint16_t per_tx_src_count = 0;
     const char *per_tx_dst_ips[64]; memset(per_tx_dst_ips, 0, sizeof(per_tx_dst_ips)); uint16_t per_tx_dst_count = 0;
+    const char *per_tx_dst_macs[64] = {0};
+    uint16_t per_tx_dst_mac_count = 0;
     static struct option long_options[] = {
         {"help", no_argument, 0, 'h'},
         {"port", required_argument, 0, 'p'},
         {"src-ip", required_argument, 0, 's'},
         {"tx-dst-ip", required_argument, 0, 'd'},
+        {"dst-mac", required_argument, 0, 6},
         {"size", required_argument, 0, 'z'},
         {"device", required_argument, 0, 'a'},
         {"lcores", required_argument, 0, 'l'},
@@ -409,6 +437,8 @@ int main(int argc, char **argv) {
         {"reflector-device", required_argument, 0, 2},
         {"udp-src-port", required_argument, 0, 3},
         {"udp-src-port-count", required_argument, 0, 4},
+        {"dpa-rx-127-buckets", no_argument, 0, 7},
+        {"dpa-rx-254-buckets", no_argument, 0, 8},
         {"flow-count", required_argument, 0, 5},
         {"mbufs", required_argument, 0, 'M'},
         {"per-port-stats", no_argument, 0, 'S'},
@@ -421,6 +451,8 @@ int main(int argc, char **argv) {
     eal_argv[eal_argc++] = argv[0]; // Program name
 
     const char *file_prefix = NULL;
+    const char *udp_src_port_arg = NULL;
+    int udp_src_port_count_given = 0;
     // We will build EAL -a list from both TX (-a) and RX (-R) devices
     const char *tx_devices[64]; memset(tx_devices, 0, sizeof(tx_devices));
     uint16_t tx_device_count = 0;
@@ -493,9 +525,11 @@ int main(int argc, char **argv) {
                 rx_lcores_str = optarg;
                 break;
             case 3: // --udp-src-port
+                udp_src_port_arg = optarg;
                 global_udp_src_port_base = (uint16_t)atoi(optarg);
                 break;
             case 4: // --udp-src-port-count
+                udp_src_port_count_given = 1;
                 global_ports_per_flow = (uint16_t)atoi(optarg);
                 if (global_ports_per_flow == 0) global_ports_per_flow = 1;
                 break;
@@ -508,6 +542,19 @@ int main(int argc, char **argv) {
                     global_reflector_enabled = 1;
                 }
                 break;
+            case 8: // --dpa-rx-254-buckets
+                global_dpa_rx_254_buckets = 1;
+                break;
+            case 7: // --dpa-rx-127-buckets
+                global_dpa_rx_127_buckets = 1;
+                break;
+            case 6: // --dst-mac, in TX-device order
+                if (per_tx_dst_mac_count >= 64) {
+                    fprintf(stderr, "Too many --dst-mac values.\n");
+                    return 1;
+                }
+                per_tx_dst_macs[per_tx_dst_mac_count++] = optarg;
+                break;
             case 'S':
                 global_show_per_port_stats = 1;
                 break;
@@ -515,6 +562,42 @@ int main(int argc, char **argv) {
         }
     }
 
+
+    if (global_dpa_rx_127_buckets && global_dpa_rx_254_buckets) {
+        fprintf(stderr, "Choose only one DPA bucket mode.\n");
+        return 1;
+    }
+    if (global_dpa_rx_127_buckets) {
+        const char *arg = udp_src_port_arg ? udp_src_port_arg : "12345";
+        char *end;
+        errno = 0;
+        unsigned long base = strtoul(arg, &end, 10);
+        if (errno || !*arg || *end || strspn(arg, "0123456789") != strlen(arg) ||
+            base > UINT16_MAX - 126 || base % 128 != 0) {
+            fprintf(stderr, "--dpa-rx-127-buckets requires an aligned --udp-src-port base in 0..65408 (base + 126 must fit uint16).\n");
+            return 1;
+        }
+        if (udp_src_port_count_given) {
+            fprintf(stderr, "Omit --udp-src-port-count with --dpa-rx-127-buckets; the bucket mode overrides its mapping.\n");
+            return 1;
+        }
+    }
+
+    if (global_dpa_rx_254_buckets) {
+        const char *arg = udp_src_port_arg ? udp_src_port_arg : "12345";
+        char *end;
+        errno = 0;
+        unsigned long base = strtoul(arg, &end, 10);
+        if (errno || !*arg || *end || strspn(arg, "0123456789") != strlen(arg) ||
+            base > UINT16_MAX || base % 256 != 0) {
+            fprintf(stderr, "--dpa-rx-254-buckets requires an aligned --udp-src-port base in 0..65280.\n");
+            return 1;
+        }
+        if (udp_src_port_count_given) {
+            fprintf(stderr, "Omit --udp-src-port-count with --dpa-rx-254-buckets; the bucket mode overrides its mapping.\n");
+            return 1;
+        }
+    }
 
     // Build EAL arguments using common function
     // We pass reflector devices as part of rx_devices list to ensure they are added to -a list
@@ -681,10 +764,24 @@ int main(int argc, char **argv) {
     // Allocate VXLAN arrays
     global_tx_src_addrs = calloc(num_ports ? num_ports : 1, sizeof(struct in_addr));
     global_tx_dst_addrs = calloc(num_ports ? num_ports : 1, sizeof(struct in_addr));
+    if (per_tx_dst_mac_count && per_tx_dst_mac_count != global_num_tx_ports) {
+        fprintf(stderr, "Provide one --dst-mac per TX device, or omit all for ARP.\n");
+        return 1;
+    }
     // Populate per-port source/destination IPs in TX device order
     for (uint16_t i = 0; i < global_num_tx_ports; i++) {
         uint16_t pid = global_tx_port_ids[i];
         if (pid >= num_ports) continue;
+        if (per_tx_dst_mac_count) {
+            struct rte_ether_addr mac;
+            if (rte_ether_unformat_addr(per_tx_dst_macs[i], &mac) != 0 ||
+                !rte_is_valid_assigned_ether_addr(&mac)) {
+                fprintf(stderr, "Invalid unicast --dst-mac: %s\n", per_tx_dst_macs[i]);
+                return 1;
+            }
+            global_tx_dst_macs[pid] = mac;
+            printf("Explicit destination MAC on port %u: %s\n", pid, per_tx_dst_macs[i]);
+        }
         struct in_addr s = (struct in_addr){0};
         struct in_addr d = (struct in_addr){0};
         if (i < per_tx_src_count) inet_aton(per_tx_src_ips[i], &s);

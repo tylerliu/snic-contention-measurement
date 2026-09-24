@@ -1,0 +1,310 @@
+{
+  "import_cases": "benchmark_cases.json",
+  "groups": [
+    {
+      "name": "crypto-two-devices-512",
+      "shared_params": { 
+        "data_size": [512]
+      },
+      "jobs": [
+        {
+          "id": "decrypt-algo1",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_decrypt",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [2]
+          },
+          "eal_args_merge": ["--file-prefix", "job_a"],
+          "iteration_multiplier": 2.5
+        },
+        {
+          "id": "decrypt-xts-algo0",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [3]
+          },
+          "eal_args_merge": ["--file-prefix", "job_b"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "crypto-two-devices-large",
+      "shared_params": { 
+        "data_size": [2048, 8192, 32000]
+      },
+      "jobs": [
+        {
+          "id": "decrypt-algo1",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_decrypt",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [1]
+          },
+          "eal_args_merge": ["--file-prefix", "job_a"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "decrypt-xts-algo0",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [3]
+          },
+          "eal_args_merge": ["--file-prefix", "job_b"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-deflate-lz4-none",
+      "shared_params": {
+        "data_size": [512, 2048, 8192, 32000],
+        "data_dir": ["compressed_data"]
+      },
+      "jobs": [
+        {
+          "id": "deflate-none",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "algorithm": "deflate",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "deflate"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "lz4-none",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "algorithm": "lz4",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "lz4"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-crypto-deflate-aes-512",
+      "shared_params": {
+        "data_size": [512]
+      },
+      "jobs": [
+        {
+          "id": "deflate-decompress",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "data_dir": ["compressed_data"],
+            "algorithm": "deflate",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "deflate"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "aes-gcm-decrypt",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [2]
+          },
+          "eal_args_merge": ["--file-prefix", "aes"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-crypto-deflate-aes-large",
+      "shared_params": {
+        "data_size": [2048, 8192, 32000]
+      },
+      "jobs": [
+        {
+          "id": "deflate-decompress",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "data_dir": ["compressed_data"],
+            "algorithm": "deflate",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "deflate"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "aes-gcm-decrypt",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [1]
+          },
+          "eal_args_merge": ["--file-prefix", "aes"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-crypto-lz4-aes-512",
+      "shared_params": {
+        "data_size": [512]
+      },
+      "jobs": [
+        {
+          "id": "lz4-decompress",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "data_dir": ["compressed_data"],
+            "algorithm": "lz4",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "lz4"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "aes-gcm-decrypt",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [2]
+          },
+          "eal_args_merge": ["--file-prefix", "aes"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-crypto-lz4-aes-large",
+      "shared_params": {
+        "data_size": [2048, 8192, 32000]
+      },
+      "jobs": [
+        {
+          "id": "lz4-decompress",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "data_dir": ["compressed_data"],
+            "algorithm": "lz4",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "lz4"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "aes-gcm-decrypt",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [1]
+          },
+          "eal_args_merge": ["--file-prefix", "aes"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-crypto-deflate-xts",
+      "shared_params": {
+        "data_size": [512, 2048, 8192, 32000]
+      },
+      "jobs": [
+        {
+          "id": "deflate-decompress",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "data_dir": ["compressed_data"],
+            "algorithm": "deflate",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "deflate"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "aes-xts-decrypt",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [3]
+          },
+          "eal_args_merge": ["--file-prefix", "aes"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    },
+    {
+      "name": "compression-crypto-lz4-xts",
+      "shared_params": {
+        "data_size": [512, 2048, 8192, 32000]
+      },
+      "jobs": [
+        {
+          "id": "lz4-decompress",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "data_dir": ["compressed_data"],
+            "algorithm": "lz4",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "lz4"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "aes-xts-decrypt",
+          "function": "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "num_queues": [3]
+          },
+          "eal_args_merge": ["--file-prefix", "aes"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    }
+  ]
+}
+
+

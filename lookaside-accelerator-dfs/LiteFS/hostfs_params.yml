@@ -1,0 +1,28 @@
+#
+# Sample HostFS configuration for the LiteFS argument parser.
+# This file replaces the old DOCA JSON params and aligns with the new
+# YAML-based `program_flags` / `dpdk_args` layout.
+#
+# - `program_flags` map directly to application options declared via
+#   `AppLifecycleManager::parser()` (long option names).
+# - `dpdk_args` can express additional EAL flags if the deployment needs them.
+#
+program_flags:
+  # PCI address for the DOCA DMA device used by HostFS
+  pci: "01:00.0"
+
+  # IP address and port of the nicfs service we connect to
+  nic-ip: "172.16.1.2"
+  nic-port: 8080
+
+  # Optional RDMA verbs device name (leave empty to auto-select)
+  ibv-device: "mlx5_2"
+
+  # Toggle pause tracking (produces additional performance metrics)
+  track-pauses: true
+
+  # Default global log level for doca_log (DISABLE, CRITICAL, ERROR, WARNING, INFO, DEBUG, TRACE)
+  log-level: INFO
+
+# Optional DPDK/EAL arguments. Leave empty for defaults.
+dpdk_args: {}

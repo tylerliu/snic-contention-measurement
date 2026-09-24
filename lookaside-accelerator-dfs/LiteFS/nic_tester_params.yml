@@ -1,0 +1,11 @@
+#
+# Sample NIC tester configuration for the new YAML argument parser.
+#
+program_flags:
+  primary-ip: "172.16.1.2"
+  primary-tcp-port: 8080
+  ibv-device: "mlx5_0"
+  track-pauses: false
+  log-level: INFO
+
+dpdk_args: {}
