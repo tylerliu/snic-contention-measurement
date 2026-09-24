@@ -1,0 +1,159 @@
+EAL arguments (9): ./build/dpdk_simple_recv --file-prefix decap-isolate-sweep-1400-sabal1400-static-rx -a 0000:01:00.0 -a 0000:01:00.1 -l 45-47 
+EAL: Detected CPU lcores: 48
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/decap-isolate-sweep-1400-sabal1400-static-rx/mp_socket
+EAL: Selected IOVA mode 'VA'
+EAL: VFIO support initialized
+EAL: Probe PCI driver: mlx5_pci (15b3:a2dc) device: 0000:01:00.0 (socket 0)
+EAL: Probe PCI driver: mlx5_pci (15b3:a2dc) device: 0000:01:00.1 (socket 0)
+Available DPDK ports: 2
+Using 2 ports (0-1)
+Total lcores: 3, Main lcore: 45, Worker lcores available: 2
+Setting up 1 RX queue(s) per port (2 total)
+TELEMETRY: No legacy callbacks, legacy socket not created
+DPDK Simple Packet Receiver
+  Ports: 2
+  Filter: All UDP
+  Batch size: 64
+RX worker core 46 receiving on port 0 queue 0
+RX worker core 47 receiving on port 1 queue 0
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 1925276.0 pps, 2673.3 MB/s
+RX port 1: 1979968.0 pps, 2749.3 MB/s
+TOTAL RX: 3905244.0 pps, 5422.6 MB/s | per-port avg: 1952622.0 pps, 2711.3 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8758848.0 pps, 12162.1 MB/s
+RX port 1: 8740124.0 pps, 12136.1 MB/s
+TOTAL RX: 17498972.0 pps, 24298.2 MB/s | per-port avg: 8749486.0 pps, 12149.1 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8760847.9 pps, 12164.9 MB/s
+RX port 1: 8739939.9 pps, 12135.8 MB/s
+TOTAL RX: 17500787.8 pps, 24300.7 MB/s | per-port avg: 8750393.9 pps, 12150.4 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8759237.9 pps, 12162.6 MB/s
+RX port 1: 8738001.9 pps, 12133.2 MB/s
+TOTAL RX: 17497239.8 pps, 24295.8 MB/s | per-port avg: 8748619.9 pps, 12147.9 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8760204.9 pps, 12164.0 MB/s
+RX port 1: 8738749.9 pps, 12134.2 MB/s
+TOTAL RX: 17498954.8 pps, 24298.2 MB/s | per-port avg: 8749477.4 pps, 12149.1 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8754108.9 pps, 12155.5 MB/s
+RX port 1: 8736409.9 pps, 12130.9 MB/s
+TOTAL RX: 17490518.8 pps, 24286.5 MB/s | per-port avg: 8745259.4 pps, 12143.2 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8759303.0 pps, 12162.7 MB/s
+RX port 1: 8742331.0 pps, 12139.2 MB/s
+TOTAL RX: 17501634.0 pps, 24301.9 MB/s | per-port avg: 8750817.0 pps, 12150.9 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8758750.0 pps, 12162.0 MB/s
+RX port 1: 8742290.0 pps, 12139.1 MB/s
+TOTAL RX: 17501040.0 pps, 24301.1 MB/s | per-port avg: 8750520.0 pps, 12150.5 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8758572.9 pps, 12161.7 MB/s
+RX port 1: 8741005.9 pps, 12137.3 MB/s
+TOTAL RX: 17499578.8 pps, 24299.0 MB/s | per-port avg: 8749789.4 pps, 12149.5 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8756947.0 pps, 12159.5 MB/s
+RX port 1: 8740476.0 pps, 12136.6 MB/s
+TOTAL RX: 17497423.0 pps, 24296.0 MB/s | per-port avg: 8748711.5 pps, 12148.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8755881.9 pps, 12158.0 MB/s
+RX port 1: 8740329.9 pps, 12136.4 MB/s
+TOTAL RX: 17496211.8 pps, 24294.4 MB/s | per-port avg: 8748105.9 pps, 12147.2 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8756236.0 pps, 12158.5 MB/s
+RX port 1: 8740456.0 pps, 12136.6 MB/s
+TOTAL RX: 17496692.0 pps, 24295.0 MB/s | per-port avg: 8748346.0 pps, 12147.5 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8754043.9 pps, 12155.4 MB/s
+RX port 1: 8741068.9 pps, 12137.4 MB/s
+TOTAL RX: 17495112.8 pps, 24292.8 MB/s | per-port avg: 8747556.4 pps, 12146.4 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8750573.0 pps, 12150.6 MB/s
+RX port 1: 8744578.0 pps, 12142.3 MB/s
+TOTAL RX: 17495151.0 pps, 24292.9 MB/s | per-port avg: 8747575.5 pps, 12146.4 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8750201.0 pps, 12150.1 MB/s
+RX port 1: 8744191.0 pps, 12141.7 MB/s
+TOTAL RX: 17494392.0 pps, 24291.8 MB/s | per-port avg: 8747196.0 pps, 12145.9 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8749734.9 pps, 12149.4 MB/s
+RX port 1: 8743524.9 pps, 12140.8 MB/s
+TOTAL RX: 17493259.8 pps, 24290.3 MB/s | per-port avg: 8746629.9 pps, 12145.1 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8750005.0 pps, 12149.8 MB/s
+RX port 1: 8744746.0 pps, 12142.5 MB/s
+TOTAL RX: 17494751.0 pps, 24292.3 MB/s | per-port avg: 8747375.5 pps, 12146.2 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8749546.9 pps, 12149.2 MB/s
+RX port 1: 8743220.9 pps, 12140.4 MB/s
+TOTAL RX: 17492767.8 pps, 24289.6 MB/s | per-port avg: 8746383.9 pps, 12144.8 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8752921.9 pps, 12153.9 MB/s
+RX port 1: 8738677.9 pps, 12134.1 MB/s
+TOTAL RX: 17491599.8 pps, 24288.0 MB/s | per-port avg: 8745799.9 pps, 12144.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8751422.9 pps, 12151.8 MB/s
+RX port 1: 8733671.9 pps, 12127.1 MB/s
+TOTAL RX: 17485094.8 pps, 24278.9 MB/s | per-port avg: 8742547.4 pps, 12139.5 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8750631.9 pps, 12150.7 MB/s
+RX port 1: 8741599.9 pps, 12138.1 MB/s
+TOTAL RX: 17492231.8 pps, 24288.8 MB/s | per-port avg: 8746115.9 pps, 12144.4 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8744582.9 pps, 12142.3 MB/s
+RX port 1: 8738071.9 pps, 12133.2 MB/s
+TOTAL RX: 17482654.8 pps, 24275.5 MB/s | per-port avg: 8741327.4 pps, 12137.8 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8751003.9 pps, 12151.2 MB/s
+RX port 1: 8736180.9 pps, 12130.6 MB/s
+TOTAL RX: 17487184.8 pps, 24281.8 MB/s | per-port avg: 8743592.4 pps, 12140.9 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8738312.0 pps, 12133.6 MB/s
+RX port 1: 8719539.0 pps, 12107.5 MB/s
+TOTAL RX: 17457851.0 pps, 24241.1 MB/s | per-port avg: 8728925.5 pps, 12120.5 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8753752.0 pps, 12155.0 MB/s
+RX port 1: 8732208.0 pps, 12125.1 MB/s
+TOTAL RX: 17485960.0 pps, 24280.1 MB/s | per-port avg: 8742980.0 pps, 12140.1 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8752697.9 pps, 12153.6 MB/s
+RX port 1: 8741259.9 pps, 12137.7 MB/s
+TOTAL RX: 17493957.8 pps, 24291.2 MB/s | per-port avg: 8746978.9 pps, 12145.6 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8750724.0 pps, 12150.8 MB/s
+RX port 1: 8744616.0 pps, 12142.3 MB/s
+TOTAL RX: 17495340.0 pps, 24293.2 MB/s | per-port avg: 8747670.0 pps, 12146.6 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8750432.0 pps, 12150.4 MB/s
+RX port 1: 8743827.0 pps, 12141.2 MB/s
+TOTAL RX: 17494259.0 pps, 24291.6 MB/s | per-port avg: 8747129.5 pps, 12145.8 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 8734623.9 pps, 12128.5 MB/s
+RX port 1: 8723469.9 pps, 12113.0 MB/s
+TOTAL RX: 17458093.8 pps, 24241.4 MB/s | per-port avg: 8729046.9 pps, 12120.7 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 7103680.0 pps, 9863.8 MB/s
+RX port 1: 7097753.0 pps, 9855.6 MB/s
+TOTAL RX: 14201433.0 pps, 19719.4 MB/s | per-port avg: 7100716.5 pps, 9859.7 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+RX port 0: 0.0 pps, 0.0 MB/s
+RX port 1: 0.0 pps, 0.0 MB/s
+TOTAL RX: 0.0 pps, 0.0 MB/s | per-port avg: 0.0 pps, 0.0 MB/s (2 ports) [missed=0, no_mbuf=0]
+
+Received signal 2, shutting down...
+
+Received signal 2, shutting down...
+Stopping all ports...
+Stopping port 0...
+Stopping port 1...

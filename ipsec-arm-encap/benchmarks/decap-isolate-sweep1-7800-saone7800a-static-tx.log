@@ -1,0 +1,160 @@
+EAL arguments (9): ./build/dpdk_esp_gen --file-prefix decap-isolate-sweep1-7800-saone7800a-static-tx -a 0000:82:00.0 -a 0000:82:00.1 -l 0-16 
+EAL: Detected CPU lcores: 48
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/decap-isolate-sweep1-7800-saone7800a-static-tx/mp_socket
+EAL: Selected IOVA mode 'VA'
+EAL: VFIO support initialized
+EAL: Probe PCI driver: mlx5_pci (15b3:1021) device: 0000:82:00.0 (socket 0)
+EAL: Probe PCI driver: mlx5_pci (15b3:1021) device: 0000:82:00.1 (socket 0)
+Available DPDK ports: 2
+Main lcore: 0, TX workers: 16, RX workers: 0
+Port 0 max_tx_queues=1024 reserved=1 data_capacity=1023
+Port 1 max_tx_queues=1024 reserved=1 data_capacity=1023
+Setting up 9 TX queues/port (8 data queues, main ARP, 0 RX ARP queues)
+Setting up 0 RX queues/port
+TELEMETRY: No legacy callbacks, legacy socket not created
+Port 0: MAC c4:70:bd:0f:b3:62
+Port 1: MAC c4:70:bd:0f:b3:63
+DPDK Simple Packet Gen
+  UDP dest port: 3333
+  TX ports: 2
+  RX ports: 0
+
+Per-TX-port addressing and MACs:
+  Port  SrcMAC               SrcIP          DstIP          DstMAC
+  0     c4:70:bd:0f:b3:62  172.16.1.20      172.16.1.128     58:a2:e1:53:19:d6
+  1     c4:70:bd:0f:b3:63  172.16.2.20      172.16.2.128     58:a2:e1:53:19:d7
+  Payload size: 1414 bytes (fixed)
+  Total packet size: 1456 bytes
+  TX workers: 16, RX workers: 0
+  ESP outer flows: 8
+  Rate: Throttled
+  Throttle: 7800 rte_pause() calls per loop
+  Batch size: 64
+TX lcore=9 port=0 queue=5 SPI=0x00002005 (exclusive owner)
+TX lcore=2 port=1 queue=1 SPI=0x00002002 (exclusive owner)
+TX lcore=8 port=1 queue=4 SPI=0x00002005 (exclusive owner)
+TX lcore=7 port=0 queue=4 SPI=0x00002004 (exclusive owner)
+TX lcore=15 port=0 queue=8 SPI=0x00002008 (exclusive owner)
+TX lcore=3 port=0 queue=2 SPI=0x00002002 (exclusive owner)
+TX lcore=10 port=1 queue=5 SPI=0x00002006 (exclusive owner)
+TX lcore=11 port=0 queue=6 SPI=0x00002006 (exclusive owner)
+TX lcore=6 port=1 queue=3 SPI=0x00002004 (exclusive owner)
+TX lcore=13 port=0 queue=7 SPI=0x00002007 (exclusive owner)
+TX lcore=1 port=0 queue=1 SPI=0x00002001 (exclusive owner)
+TX lcore=5 port=0 queue=3 SPI=0x00002003 (exclusive owner)
+TX lcore=4 port=1 queue=2 SPI=0x00002003 (exclusive owner)
+TX lcore=12 port=1 queue=6 SPI=0x00002007 (exclusive owner)
+TX lcore=16 port=1 queue=8 SPI=0x00002009 (exclusive owner)
+TX lcore=14 port=1 queue=7 SPI=0x00002008 (exclusive owner)
+TX port 0: 3088768.0 pps, 4448.0 MB/s
+TX port 1: 3074496.0 pps, 4427.4 MB/s
+TOTAL TX: 6163264.0 pps, 8875.4 MB/s | per-port avg: 3081632.0 pps, 4437.7 MB/s (2 ports)
+TX port 0: 3130240.0 pps, 4507.7 MB/s
+TX port 1: 3132096.0 pps, 4510.4 MB/s
+TOTAL TX: 6262335.9 pps, 9018.1 MB/s | per-port avg: 3131168.0 pps, 4509.0 MB/s (2 ports)
+TX port 0: 3130240.0 pps, 4507.7 MB/s
+TX port 1: 3132160.0 pps, 4510.5 MB/s
+TOTAL TX: 6262400.0 pps, 9018.2 MB/s | per-port avg: 3131200.0 pps, 4509.1 MB/s (2 ports)
+TX port 0: 3130496.0 pps, 4508.1 MB/s
+TX port 1: 3131968.0 pps, 4510.2 MB/s
+TOTAL TX: 6262463.9 pps, 9018.3 MB/s | per-port avg: 3131232.0 pps, 4509.1 MB/s (2 ports)
+TX port 0: 3129152.0 pps, 4506.1 MB/s
+TX port 1: 3130880.0 pps, 4508.6 MB/s
+TOTAL TX: 6260031.9 pps, 9014.7 MB/s | per-port avg: 3130016.0 pps, 4507.4 MB/s (2 ports)
+TX port 0: 3130560.0 pps, 4508.2 MB/s
+TX port 1: 3132160.0 pps, 4510.5 MB/s
+TOTAL TX: 6262720.0 pps, 9018.6 MB/s | per-port avg: 3131360.0 pps, 4509.3 MB/s (2 ports)
+TX port 0: 3130432.0 pps, 4508.0 MB/s
+TX port 1: 3132032.0 pps, 4510.3 MB/s
+TOTAL TX: 6262464.0 pps, 9018.3 MB/s | per-port avg: 3131232.0 pps, 4509.1 MB/s (2 ports)
+TX port 0: 3130560.0 pps, 4508.2 MB/s
+TX port 1: 3132288.0 pps, 4510.6 MB/s
+TOTAL TX: 6262847.9 pps, 9018.8 MB/s | per-port avg: 3131424.0 pps, 4509.4 MB/s (2 ports)
+TX port 0: 3130432.0 pps, 4508.0 MB/s
+TX port 1: 3131904.0 pps, 4510.1 MB/s
+TOTAL TX: 6262335.9 pps, 9018.1 MB/s | per-port avg: 3131168.0 pps, 4509.0 MB/s (2 ports)
+TX port 0: 3130496.0 pps, 4508.1 MB/s
+TX port 1: 3132032.0 pps, 4510.3 MB/s
+TOTAL TX: 6262528.0 pps, 9018.3 MB/s | per-port avg: 3131264.0 pps, 4509.2 MB/s (2 ports)
+TX port 0: 3130368.0 pps, 4507.9 MB/s
+TX port 1: 3132672.0 pps, 4511.2 MB/s
+TOTAL TX: 6263040.0 pps, 9019.1 MB/s | per-port avg: 3131520.0 pps, 4509.5 MB/s (2 ports)
+TX port 0: 3130240.0 pps, 4507.7 MB/s
+TX port 1: 3132928.0 pps, 4511.6 MB/s
+TOTAL TX: 6263167.9 pps, 9019.3 MB/s | per-port avg: 3131584.0 pps, 4509.6 MB/s (2 ports)
+TX port 0: 3130560.0 pps, 4508.2 MB/s
+TX port 1: 3132928.0 pps, 4511.6 MB/s
+TOTAL TX: 6263487.9 pps, 9019.7 MB/s | per-port avg: 3131744.0 pps, 4509.9 MB/s (2 ports)
+TX port 0: 3130304.0 pps, 4507.8 MB/s
+TX port 1: 3132864.0 pps, 4511.5 MB/s
+TOTAL TX: 6263168.0 pps, 9019.3 MB/s | per-port avg: 3131584.0 pps, 4509.7 MB/s (2 ports)
+TX port 0: 3130496.0 pps, 4508.0 MB/s
+TX port 1: 3132928.0 pps, 4511.6 MB/s
+TOTAL TX: 6263424.0 pps, 9019.6 MB/s | per-port avg: 3131712.0 pps, 4509.8 MB/s (2 ports)
+TX port 0: 3130368.0 pps, 4507.9 MB/s
+TX port 1: 3133120.0 pps, 4511.8 MB/s
+TOTAL TX: 6263487.9 pps, 9019.7 MB/s | per-port avg: 3131744.0 pps, 4509.9 MB/s (2 ports)
+TX port 0: 3130432.0 pps, 4508.0 MB/s
+TX port 1: 3132928.0 pps, 4511.6 MB/s
+TOTAL TX: 6263360.0 pps, 9019.5 MB/s | per-port avg: 3131680.0 pps, 4509.8 MB/s (2 ports)
+TX port 0: 3130368.0 pps, 4507.9 MB/s
+TX port 1: 3132928.0 pps, 4511.6 MB/s
+TOTAL TX: 6263296.0 pps, 9019.4 MB/s | per-port avg: 3131648.0 pps, 4509.7 MB/s (2 ports)
+TX port 0: 3130496.0 pps, 4508.1 MB/s
+TX port 1: 3132032.0 pps, 4510.3 MB/s
+TOTAL TX: 6262528.0 pps, 9018.3 MB/s | per-port avg: 3131264.0 pps, 4509.2 MB/s (2 ports)
+TX port 0: 3129792.0 pps, 4507.1 MB/s
+TX port 1: 3132416.0 pps, 4510.8 MB/s
+TOTAL TX: 6262208.0 pps, 9017.9 MB/s | per-port avg: 3131104.0 pps, 4508.9 MB/s (2 ports)
+TX port 0: 3129344.0 pps, 4506.4 MB/s
+TX port 1: 3132864.0 pps, 4511.5 MB/s
+TOTAL TX: 6262208.0 pps, 9017.9 MB/s | per-port avg: 3131104.0 pps, 4508.9 MB/s (2 ports)
+TX port 0: 3128832.0 pps, 4505.7 MB/s
+TX port 1: 3132416.0 pps, 4510.8 MB/s
+TOTAL TX: 6261247.9 pps, 9016.5 MB/s | per-port avg: 3130624.0 pps, 4508.2 MB/s (2 ports)
+TX port 0: 3129344.0 pps, 4506.4 MB/s
+TX port 1: 3132224.0 pps, 4510.6 MB/s
+TOTAL TX: 6261567.9 pps, 9017.0 MB/s | per-port avg: 3130784.0 pps, 4508.5 MB/s (2 ports)
+TX port 0: 3129280.0 pps, 4506.3 MB/s
+TX port 1: 3133056.0 pps, 4511.8 MB/s
+TOTAL TX: 6262336.0 pps, 9018.1 MB/s | per-port avg: 3131168.0 pps, 4509.0 MB/s (2 ports)
+TX port 0: 3129344.0 pps, 4506.4 MB/s
+TX port 1: 3131072.0 pps, 4508.9 MB/s
+TOTAL TX: 6260415.9 pps, 9015.3 MB/s | per-port avg: 3130208.0 pps, 4507.7 MB/s (2 ports)
+TX port 0: 3130048.0 pps, 4507.4 MB/s
+TX port 1: 3133312.0 pps, 4512.1 MB/s
+TOTAL TX: 6263359.9 pps, 9019.5 MB/s | per-port avg: 3131680.0 pps, 4509.8 MB/s (2 ports)
+TX port 0: 3130176.0 pps, 4507.6 MB/s
+TX port 1: 3132864.0 pps, 4511.5 MB/s
+TOTAL TX: 6263040.0 pps, 9019.1 MB/s | per-port avg: 3131520.0 pps, 4509.5 MB/s (2 ports)
+TX port 0: 3129792.0 pps, 4507.1 MB/s
+TX port 1: 3132480.0 pps, 4510.9 MB/s
+TOTAL TX: 6262272.0 pps, 9018.0 MB/s | per-port avg: 3131136.0 pps, 4509.0 MB/s (2 ports)
+TX port 0: 3129920.0 pps, 4507.2 MB/s
+TX port 1: 3132352.0 pps, 4510.7 MB/s
+TOTAL TX: 6262271.9 pps, 9018.0 MB/s | per-port avg: 3131136.0 pps, 4509.0 MB/s (2 ports)
+
+Received signal 2, shutting down...
+
+Received signal 2, shutting down...
+TX final lcore=16 port=1 generated=11317376 sent=11317376 partial_retries=0 shutdown_unsent=0
+TX final lcore=4 port=1 generated=11355456 sent=11355456 partial_retries=0 shutdown_unsent=0
+TX final lcore=8 port=1 generated=11358976 sent=11358976 partial_retries=0 shutdown_unsent=0
+TX final lcore=13 port=0 generated=11359552 sent=11359552 partial_retries=0 shutdown_unsent=0
+TX final lcore=1 port=0 generated=11318464 sent=11318464 partial_retries=0 shutdown_unsent=0
+TX final lcore=2 port=1 generated=11368960 sent=11368960 partial_retries=0 shutdown_unsent=0
+TX final lcore=7 port=0 generated=11299840 sent=11299840 partial_retries=0 shutdown_unsent=0
+TX final lcore=6 port=1 generated=11354048 sent=11354048 partial_retries=0 shutdown_unsent=0
+TX final lcore=11 port=0 generated=11357696 sent=11357696 partial_retries=0 shutdown_unsent=0
+TX final lcore=10 port=1 generated=11363968 sent=11363968 partial_retries=0 shutdown_unsent=0
+TX final lcore=5 port=0 generated=11359872 sent=11359872 partial_retries=0 shutdown_unsent=0
+TX final lcore=14 port=1 generated=11361024 sent=11361024 partial_retries=0 shutdown_unsent=0
+TX final lcore=12 port=1 generated=11362432 sent=11362432 partial_retries=0 shutdown_unsent=0
+TX final lcore=3 port=0 generated=11363584 sent=11363584 partial_retries=0 shutdown_unsent=0
+TX final lcore=9 port=0 generated=11367620 sent=11367616 partial_retries=0 shutdown_unsent=4
+TX final lcore=15 port=0 generated=11364496 sent=11364480 partial_retries=0 shutdown_unsent=16
+Stopping all ports...
+Stopping port 0...
+Stopping port 1...

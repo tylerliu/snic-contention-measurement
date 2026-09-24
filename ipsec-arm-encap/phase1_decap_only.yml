@@ -1,0 +1,18 @@
+program_flags:
+  monitor-devices: ["03:00.0,dv_flow_en=2"]
+  host-reps: ["pf0hpf,dv_flow_en=2"]
+  disable-host: false
+  monitor-dest: none
+  sampling-fraction: 0.0
+  enable-counters: true
+  log-level: INFO
+  ipsec-decap-spi: [0x2001]
+  ipsec-decap-key: ["aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899"]
+  ipsec-decap-salt: [0x22334455]
+  ipsec-decap-iv: [0x1234567890abcdef]
+  ipsec-decap-src-mac: ["58:a2:e1:53:19:e6"]
+  ipsec-decap-dst-mac: ["58:a2:e1:53:19:d6"]
+  ipsec-decap-anti-replay: true
+dpdk_args:
+  devices: ["00:00.0"] # DOCA probes the PF; no lookaside cryptodev needed.
+  l: "1-2"

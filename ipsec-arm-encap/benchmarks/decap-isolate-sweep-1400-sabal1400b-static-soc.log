@@ -1,0 +1,2596 @@
+EAL argv: monitoring_app -a 00:00.0 -l 1-5 
+[07:19:59:788534][3201582432][DOCA][INF][doca_log.cpp:628] DOCA version 3.1.0105
+EAL: Detected CPU lcores: 16
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/rte/mp_socket
+  inbound SAs per port: 8 (consecutive SPIs)
+monitoring_app configuration:
+  monitor_devices : 03:00.0,dv_flow_en=2, 03:00.1,dv_flow_en=2
+  host_reps       : pf0hpf,dv_flow_en=2, pf1hpf,dv_flow_en=2
+  tunnel_udp_port : 4789
+  enable_host     : yes
+  monitor_dest    : none
+  enable_counters : yes
+  enable_ipsec_encap : no
+  ipsec_decap entries: 2
+    [0] spi=0x00002001 salt=0x22334455 iv=0x1234567890abcdef
+          src_mac=58:a2:e1:53:19:e6 dst_mac=58:a2:e1:53:19:d6
+    [1] spi=0x00002002 salt=0x66778899 iv=0xfedcba0987654321
+          src_mac=58:a2:e1:53:19:e7 dst_mac=58:a2:e1:53:19:d7
+[07:19:59:828793][3201582432][DOCA][INF][device_manager.cpp:100][add_device] Probing monitor DOCA device with PCI address: 03:00.0
+[07:19:59:952181][3201582432][DOCA][INF][device_manager.cpp:100][add_device] Probing monitor DOCA device with PCI address: 03:00.1
+[07:20:00:150445][3201582432][DOCA][INF][monitoring_dpdk.cpp:38][monitoring_dpdk_log_devices] DPDK detected 2 available Ethernet ports
+[07:20:00:150479][3201582432][DOCA][INF][monitoring_dpdk.cpp:52][monitoring_dpdk_log_devices]   port 0 (0000:03:00.0): driver=mlx5_pci mac=58:A2:E1:53:19:E6
+[07:20:00:150484][3201582432][DOCA][INF][monitoring_dpdk.cpp:52][monitoring_dpdk_log_devices]   port 1 (0000:03:00.1): driver=mlx5_pci mac=58:A2:E1:53:19:E7
+[07:20:00:150492][3201582432][DOCA][INF][monitoring_dpdk.cpp:251][MonitoringDpdk] DPDK initialized (ports=2, queues=4)
+[07:20:00:150519][3201582432][DOCA][INF][monitoring_doca.cpp:191][MonitoringDoca] DOCA init: monitor_port=0,1 host_port=2,3
+
+[07:20:00:152332][3201582432][DOCA][INF][monitoring_doca.cpp:494][initialize_flow] DOCA flow initialized (queues=4)
+[07:20:00:568389][3201582432][DOCA][INF][monitoring_doca.cpp:520][start_port] DOCA port started (port=0)
+[07:20:00:990499][3201582432][DOCA][INF][monitoring_doca.cpp:520][start_port] DOCA port started (port=1)
+[07:20:00:991178][3201582432][DOCA][INF][monitoring_doca.cpp:544][start_port_rep] DOCA port started (port=2)
+[07:20:00:991766][3201582432][DOCA][INF][monitoring_doca.cpp:544][start_port_rep] DOCA port started (port=3)
+[07:20:00:993751][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=5, port_pair=0)
+[07:20:00:993864][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=6, port_pair=0)
+[07:20:00:993970][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=7, port_pair=0)
+[07:20:00:994074][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=8, port_pair=0)
+[07:20:00:994179][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=9, port_pair=0)
+[07:20:00:994283][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=10, port_pair=0)
+[07:20:00:994387][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=11, port_pair=0)
+[07:20:00:994493][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=12, port_pair=0)
+[07:20:01:002003][3201582432][DOCA][INF][monitoring_doca.cpp:887][create_drop_pipe] pipeline drop pipe created
+[07:20:01:009193][3201582432][DOCA][INF][monitoring_doca.cpp:944][create_to_host_pipe] pipeline to_host pipe created
+[07:20:01:047655][3201582432][DOCA][INF][monitoring_doca.cpp:1135][create_host_decap_pipe] authenticated ESP to DPDK: port=1 worker pipes=4
+[07:20:01:051471][3201582432][DOCA][INF][monitoring_doca.cpp:1043][create_host_decrypt_pipe] decrypt SPI base=0x00002001 flows=8 RSS queues=4
+[07:20:01:074584][3201582432][DOCA][INF][monitoring_doca.cpp:570][create_control_pipe] pipeline control pipe created
+[07:20:01:076312][3201582432][DOCA][INF][monitoring_doca.cpp:1202][install_default_drop] pipeline default drop entry installed
+[07:20:01:079540][3201582432][DOCA][INF][monitoring_doca.cpp:1240][add_arp_rules] ARP passthrough uplink=0 host=2
+[07:20:01:081105][3201582432][DOCA][INF][monitoring_doca.cpp:1286][add_monitor_rule] pipeline monitor rule installed (ESP protocol)
+[07:20:01:083146][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=13, port_pair=1)
+[07:20:01:083265][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=14, port_pair=1)
+[07:20:01:083369][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=15, port_pair=1)
+[07:20:01:083472][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=16, port_pair=1)
+[07:20:01:083573][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=17, port_pair=1)
+[07:20:01:083677][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=18, port_pair=1)
+[07:20:01:083785][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=19, port_pair=1)
+[07:20:01:083888][3201582432][DOCA][INF][monitoring_doca.cpp:834][setup_ipsec_sa_decap] IPsec decap SA configured (id=20, port_pair=1)
+[07:20:01:091379][3201582432][DOCA][INF][monitoring_doca.cpp:887][create_drop_pipe] pipeline drop pipe created
+[07:20:01:098657][3201582432][DOCA][INF][monitoring_doca.cpp:944][create_to_host_pipe] pipeline to_host pipe created
+[07:20:01:137754][3201582432][DOCA][INF][monitoring_doca.cpp:1135][create_host_decap_pipe] authenticated ESP to DPDK: port=2 worker pipes=4
+[07:20:01:141477][3201582432][DOCA][INF][monitoring_doca.cpp:1043][create_host_decrypt_pipe] decrypt SPI base=0x00002002 flows=8 RSS queues=4
+[07:20:01:165129][3201582432][DOCA][INF][monitoring_doca.cpp:570][create_control_pipe] pipeline control pipe created
+[07:20:01:166818][3201582432][DOCA][INF][monitoring_doca.cpp:1202][install_default_drop] pipeline default drop entry installed
+[07:20:01:169815][3201582432][DOCA][INF][monitoring_doca.cpp:1240][add_arp_rules] ARP passthrough uplink=1 host=3
+[07:20:01:171402][3201582432][DOCA][INF][monitoring_doca.cpp:1286][add_monitor_rule] pipeline monitor rule installed (ESP protocol)
+[07:20:01:180987][3201582432][DOCA][INF][monitoring_doca.cpp:1175][create_software_egress_pipe] software egress root monitor=0 host=2 switch=0xc7856ecdc400
+[07:20:01:190521][3201582432][DOCA][INF][monitoring_doca.cpp:1175][create_software_egress_pipe] software egress root monitor=1 host=3 switch=0xc7856f88df70
+[07:20:01:190550][3201582432][DOCA][INF][monitoring_doca.cpp:1494][build_pipeline] pipeline build complete (ports=2, queues=4, host_branch=on, monitor_dest_type=1)
+[07:20:01:190718][3201582432][DOCA][INF][monitoring_dpdk.cpp:321][start_workers] launched 4 DPDK workers
+[07:20:01:190730][3201582432][DOCA][INF][monitoring_main.cpp:156][main] monitoring_app initialized
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=0 bytes=0
+DOCA software EGRESS host=3 packets=0 bytes=0
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=0 bytes=0
+DOCA software EGRESS host=3 packets=0 bytes=0
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+EAL: Selected IOVA mode 'VA'
+TELEMETRY: No legacy callbacks, legacy socket not created
+EAL: Probe PCI driver: mlx5_pci (15b3:a2dc) device: 0000:03:00.0 (socket -1)
+EAL: Probe PCI driver: mlx5_pci (15b3:a2dc) device: 0000:03:00.1 (socket -1)
+[07:20:00:150547][3201582432][DOCA][WRN][engine_model.c:88] adapting queue depth to 128.
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=0 bytes=0
+DOCA software EGRESS host=3 packets=0 bytes=0
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=0 bytes=0
+DOCA software EGRESS host=3 packets=0 bytes=0
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=1327896.29 pkt/s 1912.23 MB/s
+  lcore=3 queue=1 rate=1362284.29 pkt/s 1961.76 MB/s
+  lcore=4 queue=2 rate=1327365.58 pkt/s 1911.47 MB/s
+  lcore=5 queue=3 rate=1331939.05 pkt/s 1918.06 MB/s
+
+Port 0 statistics:
+  RX rate: 2693338.01 pkt/s 3878.46 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=659788.63 pkt/s 950.05 MB/s (errors=0)
+  RX queue  1: rate=696979.69 pkt/s 1003.68 MB/s (errors=0)
+  RX queue  2: rate=660108.45 pkt/s 950.59 MB/s (errors=0)
+  RX queue  3: rate=676461.24 pkt/s 974.14 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 2658163.55 pkt/s 3827.22 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=668691.16 pkt/s 962.75 MB/s (errors=0)
+  RX queue  1: rate=665844.86 pkt/s 958.66 MB/s (errors=0)
+  RX queue  2: rate=667635.79 pkt/s 961.30 MB/s (errors=0)
+  RX queue  3: rate=655991.75 pkt/s 944.51 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=0 bytes=0
+DOCA software EGRESS host=3 packets=0 bytes=0
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4376255.99 pkt/s 6302.02 MB/s
+  lcore=3 queue=1 rate=4368192.60 pkt/s 6290.41 MB/s
+  lcore=4 queue=2 rate=4356225.46 pkt/s 6273.17 MB/s
+  lcore=5 queue=3 rate=4379249.27 pkt/s 6306.33 MB/s
+
+Port 0 statistics:
+  RX rate: 8743427.29 pkt/s 12590.61 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192196.44 pkt/s 3156.52 MB/s (errors=0)
+  RX queue  1: rate=2176324.54 pkt/s 3134.01 MB/s (errors=0)
+  RX queue  2: rate=2182796.83 pkt/s 3143.33 MB/s (errors=0)
+  RX queue  3: rate=2192109.49 pkt/s 3156.74 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8736446.66 pkt/s 12578.50 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183995.48 pkt/s 3144.47 MB/s (errors=0)
+  RX queue  1: rate=2191834.00 pkt/s 3155.77 MB/s (errors=0)
+  RX queue  2: rate=2173537.46 pkt/s 3129.36 MB/s (errors=0)
+  RX queue  3: rate=2187079.72 pkt/s 3148.90 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=3367018 bytes=4902378208
+DOCA software EGRESS host=3 packets=6988033 bytes=10174576048
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 416015.18 pkt/s 599.08 MB/s
+DOCA Host decrypt pipe: 451386.71 pkt/s 650.02 MB/s
+DOCA Host decrypt pipe: 413008.92 pkt/s 594.75 MB/s
+DOCA Host decrypt pipe: 428424.00 pkt/s 616.95 MB/s
+DOCA Host decrypt pipe: 411939.54 pkt/s 593.21 MB/s
+DOCA Host decrypt pipe: 413648.55 pkt/s 595.67 MB/s
+DOCA Host decrypt pipe: 414544.03 pkt/s 596.96 MB/s
+DOCA Host decrypt pipe: 416207.07 pkt/s 599.36 MB/s
+DOCA Host decrypt pipe: 883584.52 pkt/s 1272.40 MB/s
+DOCA Host decrypt pipe: 877060.30 pkt/s 1263.01 MB/s
+DOCA Host decrypt pipe: 873478.37 pkt/s 1257.85 MB/s
+DOCA Host decrypt pipe: 867785.67 pkt/s 1249.65 MB/s
+DOCA Host decrypt pipe: 866698.30 pkt/s 1248.09 MB/s
+DOCA Host decrypt pipe: 873926.11 pkt/s 1258.50 MB/s
+DOCA Host decrypt pipe: 870408.15 pkt/s 1253.43 MB/s
+DOCA Host decrypt pipe: 871239.67 pkt/s 1254.63 MB/s
+DOCA Authenticated ESP RSS pipe: 827951.73 pkt/s 1192.29 MB/s
+DOCA Authenticated ESP RSS pipe: 865035.26 pkt/s 1245.69 MB/s
+DOCA Authenticated ESP RSS pipe: 827552.96 pkt/s 1191.72 MB/s
+DOCA Authenticated ESP RSS pipe: 844631.07 pkt/s 1216.31 MB/s
+DOCA Authenticated ESP RSS pipe: 1750282.82 pkt/s 2520.49 MB/s
+DOCA Authenticated ESP RSS pipe: 1750986.41 pkt/s 2521.50 MB/s
+DOCA Authenticated ESP RSS pipe: 1743886.52 pkt/s 2511.28 MB/s
+DOCA Authenticated ESP RSS pipe: 1739025.34 pkt/s 2504.28 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4378440.14 pkt/s 6305.16 MB/s
+  lcore=3 queue=1 rate=4385312.83 pkt/s 6315.06 MB/s
+  lcore=4 queue=2 rate=4357778.09 pkt/s 6275.41 MB/s
+  lcore=5 queue=3 rate=4380710.72 pkt/s 6308.43 MB/s
+
+Port 0 statistics:
+  RX rate: 8762680.76 pkt/s 12618.14 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2193658.58 pkt/s 3158.43 MB/s (errors=0)
+  RX queue  1: rate=2192664.20 pkt/s 3157.54 MB/s (errors=0)
+  RX queue  2: rate=2183549.88 pkt/s 3144.42 MB/s (errors=0)
+  RX queue  3: rate=2192808.11 pkt/s 3157.75 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8739667.87 pkt/s 12583.51 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2184826.52 pkt/s 3145.76 MB/s (errors=0)
+  RX queue  1: rate=2192698.69 pkt/s 3157.08 MB/s (errors=0)
+  RX queue  2: rate=2174153.08 pkt/s 3130.40 MB/s (errors=0)
+  RX queue  3: rate=2187989.58 pkt/s 3150.26 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=12111069 bytes=17633716464
+DOCA software EGRESS host=3 packets=15729566 bytes=22902248096
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095783.35 pkt/s 1577.98 MB/s
+DOCA Host decrypt pipe: 1079601.16 pkt/s 1554.68 MB/s
+DOCA Host decrypt pipe: 1088044.04 pkt/s 1566.84 MB/s
+DOCA Host decrypt pipe: 1095015.81 pkt/s 1576.88 MB/s
+DOCA Host decrypt pipe: 1095253.67 pkt/s 1577.22 MB/s
+DOCA Host decrypt pipe: 1095591.46 pkt/s 1577.70 MB/s
+DOCA Host decrypt pipe: 1093608.67 pkt/s 1574.85 MB/s
+DOCA Host decrypt pipe: 1095911.27 pkt/s 1578.17 MB/s
+DOCA Host decrypt pipe: 1095847.31 pkt/s 1578.07 MB/s
+DOCA Host decrypt pipe: 1096295.04 pkt/s 1578.72 MB/s
+DOCA Host decrypt pipe: 1079153.43 pkt/s 1554.03 MB/s
+DOCA Host decrypt pipe: 1093352.82 pkt/s 1574.48 MB/s
+DOCA Host decrypt pipe: 1087980.08 pkt/s 1566.74 MB/s
+DOCA Host decrypt pipe: 1095719.39 pkt/s 1577.89 MB/s
+DOCA Host decrypt pipe: 1094211.30 pkt/s 1575.72 MB/s
+DOCA Host decrypt pipe: 1093672.63 pkt/s 1574.94 MB/s
+DOCA Authenticated ESP RSS pipe: 2191040.01 pkt/s 3155.20 MB/s
+DOCA Authenticated ESP RSS pipe: 2175192.63 pkt/s 3132.38 MB/s
+DOCA Authenticated ESP RSS pipe: 2181652.71 pkt/s 3141.69 MB/s
+DOCA Authenticated ESP RSS pipe: 2190927.08 pkt/s 3155.04 MB/s
+DOCA Authenticated ESP RSS pipe: 2183827.39 pkt/s 3144.82 MB/s
+DOCA Authenticated ESP RSS pipe: 2192014.42 pkt/s 3156.61 MB/s
+DOCA Authenticated ESP RSS pipe: 2173362.74 pkt/s 3129.75 MB/s
+DOCA Authenticated ESP RSS pipe: 2187025.45 pkt/s 3149.42 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4376466.49 pkt/s 6302.32 MB/s
+  lcore=3 queue=1 rate=4383566.37 pkt/s 6312.55 MB/s
+  lcore=4 queue=2 rate=4359676.24 pkt/s 6278.14 MB/s
+  lcore=5 queue=3 rate=4378609.25 pkt/s 6305.41 MB/s
+
+Port 0 statistics:
+  RX rate: 8762260.57 pkt/s 12617.72 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192583.47 pkt/s 3157.07 MB/s (errors=0)
+  RX queue  1: rate=2191640.02 pkt/s 3156.07 MB/s (errors=0)
+  RX queue  2: rate=2186285.13 pkt/s 3148.36 MB/s (errors=0)
+  RX queue  3: rate=2191751.95 pkt/s 3156.23 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735988.33 pkt/s 12577.99 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183928.12 pkt/s 3144.39 MB/s (errors=0)
+  RX queue  1: rate=2191865.47 pkt/s 3155.83 MB/s (errors=0)
+  RX queue  2: rate=2173444.27 pkt/s 3129.37 MB/s (errors=0)
+  RX queue  3: rate=2186750.47 pkt/s 3148.40 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=20874573 bytes=30393378288
+DOCA software EGRESS host=3 packets=24467313 bytes=35624407728
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096830.70 pkt/s 1579.49 MB/s
+DOCA Host decrypt pipe: 1095423.53 pkt/s 1577.46 MB/s
+DOCA Host decrypt pipe: 1088259.72 pkt/s 1567.15 MB/s
+DOCA Host decrypt pipe: 1095359.56 pkt/s 1577.37 MB/s
+DOCA Host decrypt pipe: 1095871.26 pkt/s 1578.11 MB/s
+DOCA Host decrypt pipe: 1096191.08 pkt/s 1578.57 MB/s
+DOCA Host decrypt pipe: 1094144.27 pkt/s 1575.62 MB/s
+DOCA Host decrypt pipe: 1096319.00 pkt/s 1578.75 MB/s
+DOCA Host decrypt pipe: 1095359.56 pkt/s 1577.37 MB/s
+DOCA Host decrypt pipe: 1095871.26 pkt/s 1578.11 MB/s
+DOCA Host decrypt pipe: 1078793.25 pkt/s 1553.51 MB/s
+DOCA Host decrypt pipe: 1093056.91 pkt/s 1574.05 MB/s
+DOCA Host decrypt pipe: 1087620.09 pkt/s 1566.23 MB/s
+DOCA Host decrypt pipe: 1095167.68 pkt/s 1577.09 MB/s
+DOCA Host decrypt pipe: 1093797.48 pkt/s 1575.12 MB/s
+DOCA Host decrypt pipe: 1093056.91 pkt/s 1574.05 MB/s
+DOCA Authenticated ESP RSS pipe: 2192701.97 pkt/s 3157.60 MB/s
+DOCA Authenticated ESP RSS pipe: 2191614.60 pkt/s 3156.03 MB/s
+DOCA Authenticated ESP RSS pipe: 2182403.99 pkt/s 3142.77 MB/s
+DOCA Authenticated ESP RSS pipe: 2191678.57 pkt/s 3156.12 MB/s
+DOCA Authenticated ESP RSS pipe: 2182979.65 pkt/s 3143.60 MB/s
+DOCA Authenticated ESP RSS pipe: 2191038.94 pkt/s 3155.20 MB/s
+DOCA Authenticated ESP RSS pipe: 2172592.73 pkt/s 3128.64 MB/s
+DOCA Authenticated ESP RSS pipe: 2186113.82 pkt/s 3148.11 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375990.90 pkt/s 6301.64 MB/s
+  lcore=3 queue=1 rate=4383154.80 pkt/s 6311.95 MB/s
+  lcore=4 queue=2 rate=4360252.91 pkt/s 6278.97 MB/s
+  lcore=5 queue=3 rate=4378324.57 pkt/s 6305.00 MB/s
+
+Port 0 statistics:
+  RX rate: 8762484.68 pkt/s 12617.95 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192657.50 pkt/s 3157.08 MB/s (errors=0)
+  RX queue  1: rate=2191446.20 pkt/s 3155.79 MB/s (errors=0)
+  RX queue  2: rate=2186806.86 pkt/s 3149.11 MB/s (errors=0)
+  RX queue  3: rate=2191574.12 pkt/s 3155.97 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735269.47 pkt/s 12576.87 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183348.64 pkt/s 3143.53 MB/s (errors=0)
+  RX queue  1: rate=2191713.87 pkt/s 3155.48 MB/s (errors=0)
+  RX queue  2: rate=2173420.29 pkt/s 3129.30 MB/s (errors=0)
+  RX queue  3: rate=2186786.68 pkt/s 3148.56 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=29638169 bytes=43153174064
+DOCA software EGRESS host=3 packets=33206061 bytes=48348024816
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096079.15 pkt/s 1578.41 MB/s
+DOCA Host decrypt pipe: 1094863.84 pkt/s 1576.66 MB/s
+DOCA Host decrypt pipe: 1093072.86 pkt/s 1574.08 MB/s
+DOCA Host decrypt pipe: 1094927.80 pkt/s 1576.75 MB/s
+DOCA Host decrypt pipe: 1095439.51 pkt/s 1577.49 MB/s
+DOCA Host decrypt pipe: 1095793.31 pkt/s 1578.00 MB/s
+DOCA Host decrypt pipe: 1092561.15 pkt/s 1573.34 MB/s
+DOCA Host decrypt pipe: 1095823.29 pkt/s 1578.04 MB/s
+DOCA Host decrypt pipe: 1095439.51 pkt/s 1577.49 MB/s
+DOCA Host decrypt pipe: 1095887.26 pkt/s 1578.13 MB/s
+DOCA Host decrypt pipe: 1078872.96 pkt/s 1553.63 MB/s
+DOCA Host decrypt pipe: 1093082.86 pkt/s 1574.09 MB/s
+DOCA Host decrypt pipe: 1087827.85 pkt/s 1566.52 MB/s
+DOCA Host decrypt pipe: 1095375.55 pkt/s 1577.39 MB/s
+DOCA Host decrypt pipe: 1093904.39 pkt/s 1575.28 MB/s
+DOCA Host decrypt pipe: 1093200.79 pkt/s 1574.26 MB/s
+DOCA Authenticated ESP RSS pipe: 2191518.66 pkt/s 3155.89 MB/s
+DOCA Authenticated ESP RSS pipe: 2190652.16 pkt/s 3154.64 MB/s
+DOCA Authenticated ESP RSS pipe: 2185634.02 pkt/s 3147.42 MB/s
+DOCA Authenticated ESP RSS pipe: 2190751.10 pkt/s 3154.79 MB/s
+DOCA Authenticated ESP RSS pipe: 2183267.37 pkt/s 3144.01 MB/s
+DOCA Authenticated ESP RSS pipe: 2191262.81 pkt/s 3155.52 MB/s
+DOCA Authenticated ESP RSS pipe: 2172777.35 pkt/s 3128.90 MB/s
+DOCA Authenticated ESP RSS pipe: 2186282.65 pkt/s 3148.35 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374362.94 pkt/s 6299.29 MB/s
+  lcore=3 queue=1 rate=4381366.37 pkt/s 6309.38 MB/s
+  lcore=4 queue=2 rate=4358568.25 pkt/s 6276.55 MB/s
+  lcore=5 queue=3 rate=4376279.69 pkt/s 6302.05 MB/s
+
+Port 0 statistics:
+  RX rate: 8759093.23 pkt/s 12613.02 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191790.99 pkt/s 3155.78 MB/s (errors=0)
+  RX queue  1: rate=2190827.62 pkt/s 3154.90 MB/s (errors=0)
+  RX queue  2: rate=2186094.71 pkt/s 3148.08 MB/s (errors=0)
+  RX queue  3: rate=2190379.91 pkt/s 3154.25 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8731420.61 pkt/s 12571.61 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2182512.88 pkt/s 3142.37 MB/s (errors=0)
+  RX queue  1: rate=2190536.52 pkt/s 3153.97 MB/s (errors=0)
+  RX queue  2: rate=2172439.61 pkt/s 3127.92 MB/s (errors=0)
+  RX queue  3: rate=2185931.60 pkt/s 3147.35 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=38401408 bytes=55912450048
+DOCA software EGRESS host=3 packets=41937218 bytes=61060589408
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096035.12 pkt/s 1578.34 MB/s
+DOCA Host decrypt pipe: 1094628.06 pkt/s 1576.32 MB/s
+DOCA Host decrypt pipe: 1093134.06 pkt/s 1574.17 MB/s
+DOCA Host decrypt pipe: 1094692.02 pkt/s 1576.41 MB/s
+DOCA Host decrypt pipe: 1095267.64 pkt/s 1577.24 MB/s
+DOCA Host decrypt pipe: 1095553.45 pkt/s 1577.65 MB/s
+DOCA Host decrypt pipe: 1092453.52 pkt/s 1573.19 MB/s
+DOCA Host decrypt pipe: 1095587.42 pkt/s 1577.70 MB/s
+DOCA Host decrypt pipe: 1094692.02 pkt/s 1576.41 MB/s
+DOCA Host decrypt pipe: 1094500.15 pkt/s 1576.13 MB/s
+DOCA Host decrypt pipe: 1077999.18 pkt/s 1552.37 MB/s
+DOCA Host decrypt pipe: 1092251.65 pkt/s 1572.90 MB/s
+DOCA Host decrypt pipe: 1086441.54 pkt/s 1564.53 MB/s
+DOCA Host decrypt pipe: 1094500.15 pkt/s 1576.13 MB/s
+DOCA Host decrypt pipe: 1093093.09 pkt/s 1574.11 MB/s
+DOCA Host decrypt pipe: 1091941.86 pkt/s 1572.45 MB/s
+DOCA Authenticated ESP RSS pipe: 2191302.76 pkt/s 3155.58 MB/s
+DOCA Authenticated ESP RSS pipe: 2190186.51 pkt/s 3153.97 MB/s
+DOCA Authenticated ESP RSS pipe: 2185585.58 pkt/s 3147.35 MB/s
+DOCA Authenticated ESP RSS pipe: 2190279.45 pkt/s 3154.11 MB/s
+DOCA Authenticated ESP RSS pipe: 2181133.56 pkt/s 3140.94 MB/s
+DOCA Authenticated ESP RSS pipe: 2189000.30 pkt/s 3152.27 MB/s
+DOCA Authenticated ESP RSS pipe: 2171092.28 pkt/s 3126.48 MB/s
+DOCA Authenticated ESP RSS pipe: 2184194.51 pkt/s 3145.35 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4376382.89 pkt/s 6302.20 MB/s
+  lcore=3 queue=1 rate=4384058.24 pkt/s 6313.26 MB/s
+  lcore=4 queue=2 rate=4360480.54 pkt/s 6279.30 MB/s
+  lcore=5 queue=3 rate=4378755.46 pkt/s 6305.62 MB/s
+
+Port 0 statistics:
+  RX rate: 8763466.42 pkt/s 12619.25 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192709.48 pkt/s 3157.04 MB/s (errors=0)
+  RX queue  1: rate=2191877.99 pkt/s 3156.41 MB/s (errors=0)
+  RX queue  2: rate=2187144.88 pkt/s 3149.59 MB/s (errors=0)
+  RX queue  3: rate=2191734.08 pkt/s 3156.20 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8736285.78 pkt/s 12578.72 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183669.20 pkt/s 3144.06 MB/s (errors=0)
+  RX queue  1: rate=2192116.85 pkt/s 3156.22 MB/s (errors=0)
+  RX queue  2: rate=2173468.66 pkt/s 3129.46 MB/s (errors=0)
+  RX queue  3: rate=2187031.07 pkt/s 3148.98 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=47161483 bytes=68667119248
+DOCA software EGRESS host=3 packets=50674054 bytes=73781422624
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095728.74 pkt/s 1577.90 MB/s
+DOCA Host decrypt pipe: 1094257.71 pkt/s 1575.78 MB/s
+DOCA Host decrypt pipe: 1092745.70 pkt/s 1573.61 MB/s
+DOCA Host decrypt pipe: 1094001.88 pkt/s 1575.42 MB/s
+DOCA Host decrypt pipe: 1094961.25 pkt/s 1576.80 MB/s
+DOCA Host decrypt pipe: 1095344.99 pkt/s 1577.35 MB/s
+DOCA Host decrypt pipe: 1092083.13 pkt/s 1572.65 MB/s
+DOCA Host decrypt pipe: 1095217.08 pkt/s 1577.17 MB/s
+DOCA Host decrypt pipe: 1095089.16 pkt/s 1576.98 MB/s
+DOCA Host decrypt pipe: 1095600.83 pkt/s 1577.72 MB/s
+DOCA Host decrypt pipe: 1078524.04 pkt/s 1553.13 MB/s
+DOCA Host decrypt pipe: 1092786.67 pkt/s 1573.67 MB/s
+DOCA Host decrypt pipe: 1087158.37 pkt/s 1565.56 MB/s
+DOCA Host decrypt pipe: 1095089.16 pkt/s 1576.98 MB/s
+DOCA Host decrypt pipe: 1093682.09 pkt/s 1574.95 MB/s
+DOCA Host decrypt pipe: 1093106.46 pkt/s 1574.13 MB/s
+DOCA Authenticated ESP RSS pipe: 2190689.99 pkt/s 3154.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2189602.70 pkt/s 3153.13 MB/s
+DOCA Authenticated ESP RSS pipe: 2184830.83 pkt/s 3146.26 MB/s
+DOCA Authenticated ESP RSS pipe: 2189218.95 pkt/s 3152.58 MB/s
+DOCA Authenticated ESP RSS pipe: 2182247.53 pkt/s 3142.54 MB/s
+DOCA Authenticated ESP RSS pipe: 2190689.99 pkt/s 3154.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2172206.12 pkt/s 3128.08 MB/s
+DOCA Authenticated ESP RSS pipe: 2185893.14 pkt/s 3147.79 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375944.28 pkt/s 6301.57 MB/s
+  lcore=3 queue=1 rate=4383747.21 pkt/s 6312.81 MB/s
+  lcore=4 queue=2 rate=4360503.31 pkt/s 6279.34 MB/s
+  lcore=5 queue=3 rate=4378528.60 pkt/s 6305.29 MB/s
+
+Port 0 statistics:
+  RX rate: 8762979.42 pkt/s 12618.68 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192484.22 pkt/s 3156.85 MB/s (errors=0)
+  RX queue  1: rate=2191714.72 pkt/s 3156.17 MB/s (errors=0)
+  RX queue  2: rate=2187111.73 pkt/s 3149.55 MB/s (errors=0)
+  RX queue  3: rate=2191668.75 pkt/s 3156.11 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735719.63 pkt/s 12577.26 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183483.20 pkt/s 3143.79 MB/s (errors=0)
+  RX queue  1: rate=2192133.60 pkt/s 3156.06 MB/s (errors=0)
+  RX queue  2: rate=2173312.78 pkt/s 3129.05 MB/s (errors=0)
+  RX queue  3: rate=2186790.06 pkt/s 3148.36 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=55925787 bytes=81427945872
+DOCA software EGRESS host=3 packets=59410526 bytes=86501725856
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096072.62 pkt/s 1578.40 MB/s
+DOCA Host decrypt pipe: 1094857.39 pkt/s 1576.65 MB/s
+DOCA Host decrypt pipe: 1093258.40 pkt/s 1574.34 MB/s
+DOCA Host decrypt pipe: 1095049.26 pkt/s 1576.92 MB/s
+DOCA Host decrypt pipe: 1095433.02 pkt/s 1577.48 MB/s
+DOCA Host decrypt pipe: 1095816.78 pkt/s 1578.03 MB/s
+DOCA Host decrypt pipe: 1092726.74 pkt/s 1573.58 MB/s
+DOCA Host decrypt pipe: 1095624.90 pkt/s 1577.75 MB/s
+DOCA Host decrypt pipe: 1095145.20 pkt/s 1577.06 MB/s
+DOCA Host decrypt pipe: 1095816.78 pkt/s 1578.03 MB/s
+DOCA Host decrypt pipe: 1078419.81 pkt/s 1552.98 MB/s
+DOCA Host decrypt pipe: 1092810.68 pkt/s 1573.70 MB/s
+DOCA Host decrypt pipe: 1087182.26 pkt/s 1565.59 MB/s
+DOCA Host decrypt pipe: 1095177.18 pkt/s 1577.11 MB/s
+DOCA Host decrypt pipe: 1093770.08 pkt/s 1575.08 MB/s
+DOCA Host decrypt pipe: 1092810.68 pkt/s 1573.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2191505.64 pkt/s 3155.87 MB/s
+DOCA Authenticated ESP RSS pipe: 2190674.16 pkt/s 3154.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2185982.14 pkt/s 3147.92 MB/s
+DOCA Authenticated ESP RSS pipe: 2190674.16 pkt/s 3154.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2182324.46 pkt/s 3142.65 MB/s
+DOCA Authenticated ESP RSS pipe: 2190993.96 pkt/s 3155.14 MB/s
+DOCA Authenticated ESP RSS pipe: 2172189.89 pkt/s 3128.06 MB/s
+DOCA Authenticated ESP RSS pipe: 2185621.37 pkt/s 3147.40 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4376187.89 pkt/s 6301.92 MB/s
+  lcore=3 queue=1 rate=4383990.53 pkt/s 6313.16 MB/s
+  lcore=4 queue=2 rate=4360042.00 pkt/s 6278.67 MB/s
+  lcore=5 queue=3 rate=4378784.11 pkt/s 6305.66 MB/s
+
+Port 0 statistics:
+  RX rate: 8763127.89 pkt/s 12618.96 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192732.13 pkt/s 3157.28 MB/s (errors=0)
+  RX queue  1: rate=2191774.79 pkt/s 3156.26 MB/s (errors=0)
+  RX queue  2: rate=2186784.22 pkt/s 3149.07 MB/s (errors=0)
+  RX queue  3: rate=2191836.75 pkt/s 3156.35 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735756.36 pkt/s 12577.66 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183371.47 pkt/s 3143.66 MB/s (errors=0)
+  RX queue  1: rate=2192147.60 pkt/s 3156.16 MB/s (errors=0)
+  RX queue  2: rate=2173266.23 pkt/s 3129.06 MB/s (errors=0)
+  RX queue  3: rate=2186971.06 pkt/s 3148.78 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=64689952 bytes=94188570112
+DOCA software EGRESS host=3 packets=68147395 bytes=99222607120
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096106.52 pkt/s 1578.45 MB/s
+DOCA Host decrypt pipe: 1094827.37 pkt/s 1576.60 MB/s
+DOCA Host decrypt pipe: 1093170.47 pkt/s 1574.22 MB/s
+DOCA Host decrypt pipe: 1094763.41 pkt/s 1576.51 MB/s
+DOCA Host decrypt pipe: 1095275.07 pkt/s 1577.25 MB/s
+DOCA Host decrypt pipe: 1095819.71 pkt/s 1578.03 MB/s
+DOCA Host decrypt pipe: 1092736.75 pkt/s 1573.59 MB/s
+DOCA Host decrypt pipe: 1095658.82 pkt/s 1577.80 MB/s
+DOCA Host decrypt pipe: 1095115.18 pkt/s 1577.02 MB/s
+DOCA Host decrypt pipe: 1095722.78 pkt/s 1577.89 MB/s
+DOCA Host decrypt pipe: 1078454.21 pkt/s 1553.03 MB/s
+DOCA Host decrypt pipe: 1092844.68 pkt/s 1573.75 MB/s
+DOCA Host decrypt pipe: 1087088.49 pkt/s 1565.46 MB/s
+DOCA Host decrypt pipe: 1095203.12 pkt/s 1577.15 MB/s
+DOCA Host decrypt pipe: 1093612.17 pkt/s 1574.85 MB/s
+DOCA Host decrypt pipe: 1092908.64 pkt/s 1573.84 MB/s
+DOCA Authenticated ESP RSS pipe: 2191381.60 pkt/s 3155.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2190646.08 pkt/s 3154.64 MB/s
+DOCA Authenticated ESP RSS pipe: 2185909.22 pkt/s 3147.81 MB/s
+DOCA Authenticated ESP RSS pipe: 2190422.23 pkt/s 3154.31 MB/s
+DOCA Authenticated ESP RSS pipe: 2182206.67 pkt/s 3142.48 MB/s
+DOCA Authenticated ESP RSS pipe: 2190922.90 pkt/s 3155.03 MB/s
+DOCA Authenticated ESP RSS pipe: 2172066.38 pkt/s 3127.88 MB/s
+DOCA Authenticated ESP RSS pipe: 2185753.32 pkt/s 3147.59 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4376061.74 pkt/s 6301.74 MB/s
+  lcore=3 queue=1 rate=4383478.18 pkt/s 6312.42 MB/s
+  lcore=4 queue=2 rate=4360224.49 pkt/s 6278.93 MB/s
+  lcore=5 queue=3 rate=4378838.04 pkt/s 6305.74 MB/s
+
+Port 0 statistics:
+  RX rate: 8762884.60 pkt/s 12618.64 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192478.07 pkt/s 3156.93 MB/s (errors=0)
+  RX queue  1: rate=2191734.53 pkt/s 3156.20 MB/s (errors=0)
+  RX queue  2: rate=2186937.49 pkt/s 3149.30 MB/s (errors=0)
+  RX queue  3: rate=2191734.53 pkt/s 3156.20 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735607.22 pkt/s 12577.38 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183568.26 pkt/s 3143.98 MB/s (errors=0)
+  RX queue  1: rate=2191755.28 pkt/s 3155.63 MB/s (errors=0)
+  RX queue  2: rate=2173258.53 pkt/s 3128.97 MB/s (errors=0)
+  RX queue  3: rate=2187025.16 pkt/s 3148.81 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=73455200 bytes=106950771200
+DOCA software EGRESS host=3 packets=76884285 bytes=111943518960
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096293.07 pkt/s 1578.71 MB/s
+DOCA Host decrypt pipe: 1094862.97 pkt/s 1576.66 MB/s
+DOCA Host decrypt pipe: 1093449.86 pkt/s 1574.62 MB/s
+DOCA Host decrypt pipe: 1095099.82 pkt/s 1577.00 MB/s
+DOCA Host decrypt pipe: 1095566.53 pkt/s 1577.67 MB/s
+DOCA Host decrypt pipe: 1095981.27 pkt/s 1578.27 MB/s
+DOCA Host decrypt pipe: 1092560.42 pkt/s 1573.34 MB/s
+DOCA Host decrypt pipe: 1095861.34 pkt/s 1578.09 MB/s
+DOCA Host decrypt pipe: 1095054.85 pkt/s 1576.93 MB/s
+DOCA Host decrypt pipe: 1095758.41 pkt/s 1577.94 MB/s
+DOCA Host decrypt pipe: 1078617.19 pkt/s 1553.26 MB/s
+DOCA Host decrypt pipe: 1092944.18 pkt/s 1573.89 MB/s
+DOCA Host decrypt pipe: 1087315.72 pkt/s 1565.79 MB/s
+DOCA Host decrypt pipe: 1095062.85 pkt/s 1576.94 MB/s
+DOCA Host decrypt pipe: 1093647.74 pkt/s 1574.91 MB/s
+DOCA Host decrypt pipe: 1093008.14 pkt/s 1573.98 MB/s
+DOCA Authenticated ESP RSS pipe: 2191859.60 pkt/s 3156.38 MB/s
+DOCA Authenticated ESP RSS pipe: 2190845.24 pkt/s 3154.92 MB/s
+DOCA Authenticated ESP RSS pipe: 2186011.28 pkt/s 3147.96 MB/s
+DOCA Authenticated ESP RSS pipe: 2190960.17 pkt/s 3155.09 MB/s
+DOCA Authenticated ESP RSS pipe: 2182370.57 pkt/s 3142.72 MB/s
+DOCA Authenticated ESP RSS pipe: 2190824.25 pkt/s 3154.89 MB/s
+DOCA Authenticated ESP RSS pipe: 2172264.93 pkt/s 3128.17 MB/s
+DOCA Authenticated ESP RSS pipe: 2185952.32 pkt/s 3147.88 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375811.37 pkt/s 6301.38 MB/s
+  lcore=3 queue=1 rate=4383713.18 pkt/s 6312.76 MB/s
+  lcore=4 queue=2 rate=4360148.66 pkt/s 6278.82 MB/s
+  lcore=5 queue=3 rate=4378500.60 pkt/s 6305.25 MB/s
+
+Port 0 statistics:
+  RX rate: 8762791.31 pkt/s 12618.40 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192330.77 pkt/s 3156.62 MB/s (errors=0)
+  RX queue  1: rate=2191731.16 pkt/s 3156.20 MB/s (errors=0)
+  RX queue  2: rate=2186870.31 pkt/s 3149.20 MB/s (errors=0)
+  RX queue  3: rate=2191859.07 pkt/s 3156.38 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735576.31 pkt/s 12577.53 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183533.06 pkt/s 3143.92 MB/s (errors=0)
+  RX queue  1: rate=2191951.56 pkt/s 3155.84 MB/s (errors=0)
+  RX queue  2: rate=2173296.75 pkt/s 3129.25 MB/s (errors=0)
+  RX queue  3: rate=2186794.93 pkt/s 3148.53 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=82228080 bytes=119724084480
+DOCA software EGRESS host=3 packets=85620663 bytes=124663685328
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1097136.64 pkt/s 1579.93 MB/s
+DOCA Host decrypt pipe: 1095880.43 pkt/s 1578.12 MB/s
+DOCA Host decrypt pipe: 1094345.41 pkt/s 1575.91 MB/s
+DOCA Host decrypt pipe: 1096027.34 pkt/s 1578.33 MB/s
+DOCA Host decrypt pipe: 1096392.11 pkt/s 1578.86 MB/s
+DOCA Host decrypt pipe: 1096967.74 pkt/s 1579.69 MB/s
+DOCA Host decrypt pipe: 1093769.77 pkt/s 1575.08 MB/s
+DOCA Host decrypt pipe: 1096864.81 pkt/s 1579.54 MB/s
+DOCA Host decrypt pipe: 1095112.92 pkt/s 1577.02 MB/s
+DOCA Host decrypt pipe: 1095688.56 pkt/s 1577.84 MB/s
+DOCA Host decrypt pipe: 1078483.48 pkt/s 1553.07 MB/s
+DOCA Host decrypt pipe: 1092810.38 pkt/s 1573.70 MB/s
+DOCA Host decrypt pipe: 1087373.83 pkt/s 1565.87 MB/s
+DOCA Host decrypt pipe: 1095000.99 pkt/s 1576.85 MB/s
+DOCA Host decrypt pipe: 1093484.96 pkt/s 1574.67 MB/s
+DOCA Host decrypt pipe: 1092874.34 pkt/s 1573.79 MB/s
+DOCA Authenticated ESP RSS pipe: 2193528.75 pkt/s 3158.79 MB/s
+DOCA Authenticated ESP RSS pipe: 2192848.18 pkt/s 3157.81 MB/s
+DOCA Authenticated ESP RSS pipe: 2188115.18 pkt/s 3150.99 MB/s
+DOCA Authenticated ESP RSS pipe: 2192893.15 pkt/s 3157.87 MB/s
+DOCA Authenticated ESP RSS pipe: 2182486.76 pkt/s 3142.89 MB/s
+DOCA Authenticated ESP RSS pipe: 2190688.55 pkt/s 3154.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2171967.43 pkt/s 3127.74 MB/s
+DOCA Authenticated ESP RSS pipe: 2185684.73 pkt/s 3147.49 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375013.01 pkt/s 6300.23 MB/s
+  lcore=3 queue=1 rate=4383327.97 pkt/s 6312.20 MB/s
+  lcore=4 queue=2 rate=4359665.31 pkt/s 6278.13 MB/s
+  lcore=5 queue=3 rate=4377891.26 pkt/s 6304.37 MB/s
+
+Port 0 statistics:
+  RX rate: 8761011.14 pkt/s 12615.88 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191680.16 pkt/s 3155.73 MB/s (errors=0)
+  RX queue  1: rate=2191549.24 pkt/s 3155.94 MB/s (errors=0)
+  RX queue  2: rate=2186680.23 pkt/s 3148.92 MB/s (errors=0)
+  RX queue  3: rate=2191101.51 pkt/s 3155.29 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8734811.61 pkt/s 12576.22 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183304.40 pkt/s 3143.51 MB/s (errors=0)
+  RX queue  1: rate=2191803.20 pkt/s 3155.73 MB/s (errors=0)
+  RX queue  2: rate=2173021.69 pkt/s 3128.72 MB/s (errors=0)
+  RX queue  3: rate=2186682.33 pkt/s 3148.27 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=90991712 bytes=132483932672
+DOCA software EGRESS host=3 packets=94357450 bytes=137384447200
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095979.27 pkt/s 1578.26 MB/s
+DOCA Host decrypt pipe: 1094764.01 pkt/s 1576.51 MB/s
+DOCA Host decrypt pipe: 1093228.93 pkt/s 1574.30 MB/s
+DOCA Host decrypt pipe: 1094891.93 pkt/s 1576.70 MB/s
+DOCA Host decrypt pipe: 1095275.70 pkt/s 1577.25 MB/s
+DOCA Host decrypt pipe: 1095915.31 pkt/s 1578.17 MB/s
+DOCA Host decrypt pipe: 1092482.38 pkt/s 1573.23 MB/s
+DOCA Host decrypt pipe: 1095838.36 pkt/s 1578.06 MB/s
+DOCA Host decrypt pipe: 1095211.74 pkt/s 1577.16 MB/s
+DOCA Host decrypt pipe: 1095723.43 pkt/s 1577.89 MB/s
+DOCA Host decrypt pipe: 1078581.76 pkt/s 1553.21 MB/s
+DOCA Host decrypt pipe: 1092909.12 pkt/s 1573.84 MB/s
+DOCA Host decrypt pipe: 1087216.56 pkt/s 1565.64 MB/s
+DOCA Host decrypt pipe: 1095195.74 pkt/s 1577.13 MB/s
+DOCA Host decrypt pipe: 1093769.60 pkt/s 1575.08 MB/s
+DOCA Host decrypt pipe: 1092909.12 pkt/s 1573.84 MB/s
+DOCA Authenticated ESP RSS pipe: 2191254.97 pkt/s 3155.51 MB/s
+DOCA Authenticated ESP RSS pipe: 2190679.32 pkt/s 3154.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2185708.31 pkt/s 3147.53 MB/s
+DOCA Authenticated ESP RSS pipe: 2190728.29 pkt/s 3154.75 MB/s
+DOCA Authenticated ESP RSS pipe: 2182428.29 pkt/s 3142.80 MB/s
+DOCA Authenticated ESP RSS pipe: 2190920.17 pkt/s 3155.03 MB/s
+DOCA Authenticated ESP RSS pipe: 2172352.36 pkt/s 3128.29 MB/s
+DOCA Authenticated ESP RSS pipe: 2185818.25 pkt/s 3147.68 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375361.25 pkt/s 6300.73 MB/s
+  lcore=3 queue=1 rate=4383687.28 pkt/s 6312.72 MB/s
+  lcore=4 queue=2 rate=4360274.26 pkt/s 6279.01 MB/s
+  lcore=5 queue=3 rate=4378378.45 pkt/s 6305.08 MB/s
+
+Port 0 statistics:
+  RX rate: 8762336.35 pkt/s 12617.78 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191989.51 pkt/s 3156.17 MB/s (errors=0)
+  RX queue  1: rate=2191654.71 pkt/s 3156.09 MB/s (errors=0)
+  RX queue  2: rate=2187079.39 pkt/s 3149.50 MB/s (errors=0)
+  RX queue  3: rate=2191612.73 pkt/s 3156.03 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735563.50 pkt/s 12577.51 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183464.88 pkt/s 3143.79 MB/s (errors=0)
+  RX queue  1: rate=2192067.75 pkt/s 3156.21 MB/s (errors=0)
+  RX queue  2: rate=2173230.99 pkt/s 3129.00 MB/s (errors=0)
+  RX queue  3: rate=2186799.89 pkt/s 3148.52 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=99754060 bytes=145241911360
+DOCA software EGRESS host=3 packets=103093462 bytes=150104080672
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095916.59 pkt/s 1578.17 MB/s
+DOCA Host decrypt pipe: 1094893.21 pkt/s 1576.70 MB/s
+DOCA Host decrypt pipe: 1093102.29 pkt/s 1574.12 MB/s
+DOCA Host decrypt pipe: 1094445.48 pkt/s 1576.05 MB/s
+DOCA Host decrypt pipe: 1094765.29 pkt/s 1576.51 MB/s
+DOCA Host decrypt pipe: 1095724.71 pkt/s 1577.90 MB/s
+DOCA Host decrypt pipe: 1092601.59 pkt/s 1573.40 MB/s
+DOCA Host decrypt pipe: 1095545.82 pkt/s 1577.64 MB/s
+DOCA Host decrypt pipe: 1095021.13 pkt/s 1576.88 MB/s
+DOCA Host decrypt pipe: 1095724.71 pkt/s 1577.90 MB/s
+DOCA Host decrypt pipe: 1078391.14 pkt/s 1552.94 MB/s
+DOCA Host decrypt pipe: 1092846.44 pkt/s 1573.75 MB/s
+DOCA Host decrypt pipe: 1087153.87 pkt/s 1565.55 MB/s
+DOCA Host decrypt pipe: 1095085.09 pkt/s 1576.98 MB/s
+DOCA Host decrypt pipe: 1093613.98 pkt/s 1574.86 MB/s
+DOCA Host decrypt pipe: 1092904.41 pkt/s 1573.84 MB/s
+DOCA Authenticated ESP RSS pipe: 2190681.88 pkt/s 3154.69 MB/s
+DOCA Authenticated ESP RSS pipe: 2190617.92 pkt/s 3154.60 MB/s
+DOCA Authenticated ESP RSS pipe: 2185703.88 pkt/s 3147.52 MB/s
+DOCA Authenticated ESP RSS pipe: 2189993.30 pkt/s 3153.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2182175.00 pkt/s 3142.44 MB/s
+DOCA Authenticated ESP RSS pipe: 2190809.81 pkt/s 3154.87 MB/s
+DOCA Authenticated ESP RSS pipe: 2172005.12 pkt/s 3127.79 MB/s
+DOCA Authenticated ESP RSS pipe: 2185744.85 pkt/s 3147.58 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374815.25 pkt/s 6299.94 MB/s
+  lcore=3 queue=1 rate=4383182.60 pkt/s 6311.99 MB/s
+  lcore=4 queue=2 rate=4359837.38 pkt/s 6278.38 MB/s
+  lcore=5 queue=3 rate=4377489.45 pkt/s 6303.80 MB/s
+
+Port 0 statistics:
+  RX rate: 8760834.25 pkt/s 12615.49 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191587.38 pkt/s 3155.46 MB/s (errors=0)
+  RX queue  1: rate=2191302.57 pkt/s 3155.58 MB/s (errors=0)
+  RX queue  2: rate=2186599.76 pkt/s 3148.81 MB/s (errors=0)
+  RX queue  3: rate=2191344.54 pkt/s 3155.64 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8734416.30 pkt/s 12575.85 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183260.55 pkt/s 3143.50 MB/s (errors=0)
+  RX queue  1: rate=2191797.91 pkt/s 3155.79 MB/s (errors=0)
+  RX queue  2: rate=2173155.23 pkt/s 3128.88 MB/s (errors=0)
+  RX queue  3: rate=2186202.61 pkt/s 3147.68 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=108517067 bytes=158000849552
+DOCA software EGRESS host=3 packets=111830296 bytes=162824910976
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095851.95 pkt/s 1578.08 MB/s
+DOCA Host decrypt pipe: 1094700.71 pkt/s 1576.42 MB/s
+DOCA Host decrypt pipe: 1093101.77 pkt/s 1574.12 MB/s
+DOCA Host decrypt pipe: 1094700.71 pkt/s 1576.42 MB/s
+DOCA Host decrypt pipe: 1094828.63 pkt/s 1576.61 MB/s
+DOCA Host decrypt pipe: 1095532.17 pkt/s 1577.62 MB/s
+DOCA Host decrypt pipe: 1092750.00 pkt/s 1573.61 MB/s
+DOCA Host decrypt pipe: 1095788.00 pkt/s 1577.99 MB/s
+DOCA Host decrypt pipe: 1094920.57 pkt/s 1576.74 MB/s
+DOCA Host decrypt pipe: 1095915.91 pkt/s 1578.17 MB/s
+DOCA Host decrypt pipe: 1078519.41 pkt/s 1553.12 MB/s
+DOCA Host decrypt pipe: 1092654.07 pkt/s 1573.47 MB/s
+DOCA Host decrypt pipe: 1087537.45 pkt/s 1566.11 MB/s
+DOCA Host decrypt pipe: 1095148.42 pkt/s 1577.07 MB/s
+DOCA Host decrypt pipe: 1093741.35 pkt/s 1575.04 MB/s
+DOCA Host decrypt pipe: 1092660.06 pkt/s 1573.48 MB/s
+DOCA Authenticated ESP RSS pipe: 2190680.58 pkt/s 3154.69 MB/s
+DOCA Authenticated ESP RSS pipe: 2190232.88 pkt/s 3154.04 MB/s
+DOCA Authenticated ESP RSS pipe: 2185854.77 pkt/s 3147.74 MB/s
+DOCA Authenticated ESP RSS pipe: 2190488.71 pkt/s 3154.41 MB/s
+DOCA Authenticated ESP RSS pipe: 2182455.02 pkt/s 3142.84 MB/s
+DOCA Authenticated ESP RSS pipe: 2191064.33 pkt/s 3155.24 MB/s
+DOCA Authenticated ESP RSS pipe: 2172260.75 pkt/s 3128.16 MB/s
+DOCA Authenticated ESP RSS pipe: 2185320.13 pkt/s 3146.97 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374730.43 pkt/s 6299.82 MB/s
+  lcore=3 queue=1 rate=4383395.12 pkt/s 6312.30 MB/s
+  lcore=4 queue=2 rate=4359476.76 pkt/s 6277.86 MB/s
+  lcore=5 queue=3 rate=4378060.39 pkt/s 6304.62 MB/s
+
+Port 0 statistics:
+  RX rate: 8760799.37 pkt/s 12615.52 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191484.56 pkt/s 3155.39 MB/s (errors=0)
+  RX queue  1: rate=2191366.63 pkt/s 3155.67 MB/s (errors=0)
+  RX queue  2: rate=2186517.59 pkt/s 3148.69 MB/s (errors=0)
+  RX queue  3: rate=2191430.59 pkt/s 3155.77 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8734735.10 pkt/s 12576.22 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183143.85 pkt/s 3143.30 MB/s (errors=0)
+  RX queue  1: rate=2192098.37 pkt/s 3156.20 MB/s (errors=0)
+  RX queue  2: rate=2172941.10 pkt/s 3128.54 MB/s (errors=0)
+  RX queue  3: rate=2186551.77 pkt/s 3148.18 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=117278624 bytes=170757676544
+DOCA software EGRESS host=3 packets=120565315 bytes=175543098640
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095712.31 pkt/s 1577.88 MB/s
+DOCA Host decrypt pipe: 1094624.97 pkt/s 1576.31 MB/s
+DOCA Host decrypt pipe: 1093089.91 pkt/s 1574.10 MB/s
+DOCA Host decrypt pipe: 1094624.97 pkt/s 1576.31 MB/s
+DOCA Host decrypt pipe: 1094688.93 pkt/s 1576.40 MB/s
+DOCA Host decrypt pipe: 1095648.35 pkt/s 1577.79 MB/s
+DOCA Host decrypt pipe: 1092322.38 pkt/s 1573.00 MB/s
+DOCA Host decrypt pipe: 1095520.42 pkt/s 1577.60 MB/s
+DOCA Host decrypt pipe: 1094887.81 pkt/s 1576.69 MB/s
+DOCA Host decrypt pipe: 1095584.38 pkt/s 1577.69 MB/s
+DOCA Host decrypt pipe: 1078314.97 pkt/s 1552.83 MB/s
+DOCA Host decrypt pipe: 1092642.19 pkt/s 1573.46 MB/s
+DOCA Host decrypt pipe: 1087141.56 pkt/s 1565.54 MB/s
+DOCA Host decrypt pipe: 1094944.78 pkt/s 1576.77 MB/s
+DOCA Host decrypt pipe: 1093473.68 pkt/s 1574.65 MB/s
+DOCA Host decrypt pipe: 1092642.19 pkt/s 1573.46 MB/s
+DOCA Authenticated ESP RSS pipe: 2190401.24 pkt/s 3154.28 MB/s
+DOCA Authenticated ESP RSS pipe: 2190273.32 pkt/s 3154.10 MB/s
+DOCA Authenticated ESP RSS pipe: 2185412.30 pkt/s 3147.10 MB/s
+DOCA Authenticated ESP RSS pipe: 2190145.40 pkt/s 3153.91 MB/s
+DOCA Authenticated ESP RSS pipe: 2182029.37 pkt/s 3142.23 MB/s
+DOCA Authenticated ESP RSS pipe: 2190529.16 pkt/s 3154.47 MB/s
+DOCA Authenticated ESP RSS pipe: 2171788.65 pkt/s 3127.48 MB/s
+DOCA Authenticated ESP RSS pipe: 2185284.38 pkt/s 3146.91 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375106.09 pkt/s 6300.36 MB/s
+  lcore=3 queue=1 rate=4383138.45 pkt/s 6311.93 MB/s
+  lcore=4 queue=2 rate=4359488.11 pkt/s 6277.87 MB/s
+  lcore=5 queue=3 rate=4377949.45 pkt/s 6304.46 MB/s
+
+Port 0 statistics:
+  RX rate: 8761197.61 pkt/s 12616.32 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191768.04 pkt/s 3156.02 MB/s (errors=0)
+  RX queue  1: rate=2191354.28 pkt/s 3155.66 MB/s (errors=0)
+  RX queue  2: rate=2186781.96 pkt/s 3149.07 MB/s (errors=0)
+  RX queue  3: rate=2191293.32 pkt/s 3155.57 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8734474.58 pkt/s 12575.66 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183382.78 pkt/s 3143.64 MB/s (errors=0)
+  RX queue  1: rate=2191794.82 pkt/s 3155.67 MB/s (errors=0)
+  RX queue  2: rate=2172670.11 pkt/s 3128.12 MB/s (errors=0)
+  RX queue  3: rate=2186626.87 pkt/s 3148.24 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=126040492 bytes=183514956352
+DOCA software EGRESS host=3 packets=129301987 bytes=188263693072
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095794.18 pkt/s 1578.00 MB/s
+DOCA Host decrypt pipe: 1094642.87 pkt/s 1576.34 MB/s
+DOCA Host decrypt pipe: 1093065.81 pkt/s 1574.07 MB/s
+DOCA Host decrypt pipe: 1094770.79 pkt/s 1576.52 MB/s
+DOCA Host decrypt pipe: 1094706.83 pkt/s 1576.43 MB/s
+DOCA Host decrypt pipe: 1095602.30 pkt/s 1577.72 MB/s
+DOCA Host decrypt pipe: 1092404.21 pkt/s 1573.11 MB/s
+DOCA Host decrypt pipe: 1095666.26 pkt/s 1577.81 MB/s
+DOCA Host decrypt pipe: 1095055.62 pkt/s 1576.93 MB/s
+DOCA Host decrypt pipe: 1096113.99 pkt/s 1578.46 MB/s
+DOCA Host decrypt pipe: 1078396.56 pkt/s 1552.94 MB/s
+DOCA Host decrypt pipe: 1092724.01 pkt/s 1573.58 MB/s
+DOCA Host decrypt pipe: 1087287.26 pkt/s 1565.75 MB/s
+DOCA Host decrypt pipe: 1095090.60 pkt/s 1576.98 MB/s
+DOCA Host decrypt pipe: 1093683.44 pkt/s 1574.96 MB/s
+DOCA Host decrypt pipe: 1093043.82 pkt/s 1574.04 MB/s
+DOCA Authenticated ESP RSS pipe: 2190501.01 pkt/s 3154.43 MB/s
+DOCA Authenticated ESP RSS pipe: 2190245.17 pkt/s 3154.06 MB/s
+DOCA Authenticated ESP RSS pipe: 2185467.02 pkt/s 3147.18 MB/s
+DOCA Authenticated ESP RSS pipe: 2190437.05 pkt/s 3154.33 MB/s
+DOCA Authenticated ESP RSS pipe: 2182345.88 pkt/s 3142.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2191204.59 pkt/s 3155.44 MB/s
+DOCA Authenticated ESP RSS pipe: 2172080.00 pkt/s 3127.90 MB/s
+DOCA Authenticated ESP RSS pipe: 2185767.84 pkt/s 3147.61 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4372211.67 pkt/s 6296.20 MB/s
+  lcore=3 queue=1 rate=4380584.56 pkt/s 6308.25 MB/s
+  lcore=4 queue=2 rate=4356136.50 pkt/s 6273.05 MB/s
+  lcore=5 queue=3 rate=4375947.39 pkt/s 6301.58 MB/s
+
+Port 0 statistics:
+  RX rate: 8756351.25 pkt/s 12609.23 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2190549.68 pkt/s 3154.16 MB/s (errors=0)
+  RX queue  1: rate=2190104.95 pkt/s 3153.86 MB/s (errors=0)
+  RX queue  2: rate=2185274.87 pkt/s 3146.90 MB/s (errors=0)
+  RX queue  3: rate=2190421.76 pkt/s 3154.31 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8728614.24 pkt/s 12567.33 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2181645.12 pkt/s 3141.15 MB/s (errors=0)
+  RX queue  1: rate=2190424.83 pkt/s 3153.71 MB/s (errors=0)
+  RX queue  2: rate=2170916.58 pkt/s 3125.58 MB/s (errors=0)
+  RX queue  3: rate=2185627.72 pkt/s 3146.90 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=134802717 bytes=196272755952
+DOCA software EGRESS host=3 packets=138031690 bytes=200974140640
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095922.42 pkt/s 1578.18 MB/s
+DOCA Host decrypt pipe: 1094746.12 pkt/s 1576.49 MB/s
+DOCA Host decrypt pipe: 1093086.11 pkt/s 1574.10 MB/s
+DOCA Host decrypt pipe: 1094707.15 pkt/s 1576.43 MB/s
+DOCA Host decrypt pipe: 1094707.15 pkt/s 1576.43 MB/s
+DOCA Host decrypt pipe: 1095602.61 pkt/s 1577.72 MB/s
+DOCA Host decrypt pipe: 1092660.37 pkt/s 1573.48 MB/s
+DOCA Host decrypt pipe: 1095474.69 pkt/s 1577.54 MB/s
+DOCA Host decrypt pipe: 1094067.53 pkt/s 1575.51 MB/s
+DOCA Host decrypt pipe: 1094835.07 pkt/s 1576.62 MB/s
+DOCA Host decrypt pipe: 1077181.60 pkt/s 1551.19 MB/s
+DOCA Host decrypt pipe: 1092212.63 pkt/s 1572.84 MB/s
+DOCA Host decrypt pipe: 1086711.91 pkt/s 1564.92 MB/s
+DOCA Host decrypt pipe: 1094451.30 pkt/s 1576.06 MB/s
+DOCA Host decrypt pipe: 1092788.29 pkt/s 1573.67 MB/s
+DOCA Host decrypt pipe: 1092212.63 pkt/s 1572.84 MB/s
+DOCA Authenticated ESP RSS pipe: 2190629.57 pkt/s 3154.61 MB/s
+DOCA Authenticated ESP RSS pipe: 2190344.74 pkt/s 3154.20 MB/s
+DOCA Authenticated ESP RSS pipe: 2185749.48 pkt/s 3147.58 MB/s
+DOCA Authenticated ESP RSS pipe: 2190181.83 pkt/s 3153.97 MB/s
+DOCA Authenticated ESP RSS pipe: 2180779.44 pkt/s 3140.43 MB/s
+DOCA Authenticated ESP RSS pipe: 2189286.37 pkt/s 3152.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2169969.89 pkt/s 3124.86 MB/s
+DOCA Authenticated ESP RSS pipe: 2184425.27 pkt/s 3145.68 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375190.85 pkt/s 6300.49 MB/s
+  lcore=3 queue=1 rate=4382901.33 pkt/s 6311.59 MB/s
+  lcore=4 queue=2 rate=4359573.01 pkt/s 6278.00 MB/s
+  lcore=5 queue=3 rate=4377819.31 pkt/s 6304.27 MB/s
+
+Port 0 statistics:
+  RX rate: 8760611.63 pkt/s 12615.29 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191735.98 pkt/s 3155.80 MB/s (errors=0)
+  RX queue  1: rate=2191160.31 pkt/s 3155.38 MB/s (errors=0)
+  RX queue  2: rate=2186682.95 pkt/s 3148.93 MB/s (errors=0)
+  RX queue  3: rate=2191032.39 pkt/s 3155.19 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735023.34 pkt/s 12576.43 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183535.21 pkt/s 3143.96 MB/s (errors=0)
+  RX queue  1: rate=2191769.50 pkt/s 3155.55 MB/s (errors=0)
+  RX queue  2: rate=2172964.26 pkt/s 3128.55 MB/s (errors=0)
+  RX queue  3: rate=2186754.37 pkt/s 3148.38 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=143559874 bytes=209023176544
+DOCA software EGRESS host=3 packets=146767491 bytes=213693466896
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095308.63 pkt/s 1577.30 MB/s
+DOCA Host decrypt pipe: 1093926.42 pkt/s 1575.31 MB/s
+DOCA Host decrypt pipe: 1092302.35 pkt/s 1572.97 MB/s
+DOCA Host decrypt pipe: 1094285.22 pkt/s 1575.82 MB/s
+DOCA Host decrypt pipe: 1094285.22 pkt/s 1575.82 MB/s
+DOCA Host decrypt pipe: 1095116.74 pkt/s 1577.02 MB/s
+DOCA Host decrypt pipe: 1091982.54 pkt/s 1572.51 MB/s
+DOCA Host decrypt pipe: 1095052.78 pkt/s 1576.93 MB/s
+DOCA Host decrypt pipe: 1094924.85 pkt/s 1576.74 MB/s
+DOCA Host decrypt pipe: 1095896.29 pkt/s 1578.14 MB/s
+DOCA Host decrypt pipe: 1078422.30 pkt/s 1552.98 MB/s
+DOCA Host decrypt pipe: 1092941.99 pkt/s 1573.89 MB/s
+DOCA Host decrypt pipe: 1087313.21 pkt/s 1565.78 MB/s
+DOCA Host decrypt pipe: 1095052.78 pkt/s 1576.93 MB/s
+DOCA Host decrypt pipe: 1093517.66 pkt/s 1574.72 MB/s
+DOCA Host decrypt pipe: 1092878.02 pkt/s 1573.80 MB/s
+DOCA Authenticated ESP RSS pipe: 2189593.85 pkt/s 3153.12 MB/s
+DOCA Authenticated ESP RSS pipe: 2189047.16 pkt/s 3152.33 MB/s
+DOCA Authenticated ESP RSS pipe: 2184284.89 pkt/s 3145.48 MB/s
+DOCA Authenticated ESP RSS pipe: 2189337.99 pkt/s 3152.75 MB/s
+DOCA Authenticated ESP RSS pipe: 2182238.06 pkt/s 3142.53 MB/s
+DOCA Authenticated ESP RSS pipe: 2190946.07 pkt/s 3155.07 MB/s
+DOCA Authenticated ESP RSS pipe: 2171939.96 pkt/s 3127.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2185820.01 pkt/s 3147.69 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4367709.38 pkt/s 6289.71 MB/s
+  lcore=3 queue=1 rate=4375249.12 pkt/s 6300.57 MB/s
+  lcore=4 queue=2 rate=4351150.75 pkt/s 6265.87 MB/s
+  lcore=5 queue=3 rate=4367194.67 pkt/s 6288.97 MB/s
+
+Port 0 statistics:
+  RX rate: 8741737.38 pkt/s 12588.13 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2188134.07 pkt/s 3150.63 MB/s (errors=0)
+  RX queue  1: rate=2187374.50 pkt/s 3149.92 MB/s (errors=0)
+  RX queue  2: rate=2181924.57 pkt/s 3142.08 MB/s (errors=0)
+  RX queue  3: rate=2184304.23 pkt/s 3145.50 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8719605.89 pkt/s 12554.40 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2179559.17 pkt/s 3138.13 MB/s (errors=0)
+  RX queue  1: rate=2187938.40 pkt/s 3150.18 MB/s (errors=0)
+  RX queue  2: rate=2169197.07 pkt/s 3123.17 MB/s (errors=0)
+  RX queue  3: rate=2182911.26 pkt/s 3142.92 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=152321376 bytes=221779923456
+DOCA software EGRESS host=3 packets=155487865 bytes=226390331440
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095893.97 pkt/s 1578.14 MB/s
+DOCA Host decrypt pipe: 1094678.65 pkt/s 1576.39 MB/s
+DOCA Host decrypt pipe: 1093079.55 pkt/s 1574.09 MB/s
+DOCA Host decrypt pipe: 1094422.80 pkt/s 1576.02 MB/s
+DOCA Host decrypt pipe: 1094806.58 pkt/s 1576.57 MB/s
+DOCA Host decrypt pipe: 1095510.18 pkt/s 1577.59 MB/s
+DOCA Host decrypt pipe: 1092503.88 pkt/s 1573.26 MB/s
+DOCA Host decrypt pipe: 1095702.07 pkt/s 1577.86 MB/s
+DOCA Host decrypt pipe: 1093271.45 pkt/s 1574.36 MB/s
+DOCA Host decrypt pipe: 1093643.24 pkt/s 1574.90 MB/s
+DOCA Host decrypt pipe: 1076321.00 pkt/s 1549.95 MB/s
+DOCA Host decrypt pipe: 1090968.74 pkt/s 1571.05 MB/s
+DOCA Host decrypt pipe: 1085595.77 pkt/s 1563.31 MB/s
+DOCA Host decrypt pipe: 1093015.59 pkt/s 1574.00 MB/s
+DOCA Host decrypt pipe: 1091544.42 pkt/s 1571.88 MB/s
+DOCA Host decrypt pipe: 1091160.64 pkt/s 1571.32 MB/s
+DOCA Authenticated ESP RSS pipe: 2190700.55 pkt/s 3154.71 MB/s
+DOCA Authenticated ESP RSS pipe: 2190188.83 pkt/s 3153.98 MB/s
+DOCA Authenticated ESP RSS pipe: 2185583.43 pkt/s 3147.35 MB/s
+DOCA Authenticated ESP RSS pipe: 2190124.87 pkt/s 3153.89 MB/s
+DOCA Authenticated ESP RSS pipe: 2178867.22 pkt/s 3137.67 MB/s
+DOCA Authenticated ESP RSS pipe: 2186661.82 pkt/s 3148.90 MB/s
+DOCA Authenticated ESP RSS pipe: 2167865.42 pkt/s 3121.83 MB/s
+DOCA Authenticated ESP RSS pipe: 2182129.38 pkt/s 3142.37 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374229.25 pkt/s 6299.10 MB/s
+  lcore=3 queue=1 rate=4382166.42 pkt/s 6310.53 MB/s
+  lcore=4 queue=2 rate=4359195.41 pkt/s 6277.45 MB/s
+  lcore=5 queue=3 rate=4377140.48 pkt/s 6303.29 MB/s
+
+Port 0 statistics:
+  RX rate: 8759421.12 pkt/s 12613.56 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191191.46 pkt/s 3154.99 MB/s (errors=0)
+  RX queue  1: rate=2190786.71 pkt/s 3154.84 MB/s (errors=0)
+  RX queue  2: rate=2186152.55 pkt/s 3148.17 MB/s (errors=0)
+  RX queue  3: rate=2191290.40 pkt/s 3155.56 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8733052.59 pkt/s 12573.66 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2182946.60 pkt/s 3142.98 MB/s (errors=0)
+  RX queue  1: rate=2191264.36 pkt/s 3154.95 MB/s (errors=0)
+  RX queue  2: rate=2172968.87 pkt/s 3128.71 MB/s (errors=0)
+  RX queue  3: rate=2185872.76 pkt/s 3147.03 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=161064280 bytes=234509591680
+DOCA software EGRESS host=3 packets=164221795 bytes=239106933520
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1093834.65 pkt/s 1575.17 MB/s
+DOCA Host decrypt pipe: 1092875.26 pkt/s 1573.79 MB/s
+DOCA Host decrypt pipe: 1090828.56 pkt/s 1570.85 MB/s
+DOCA Host decrypt pipe: 1089229.57 pkt/s 1568.54 MB/s
+DOCA Host decrypt pipe: 1093195.06 pkt/s 1574.25 MB/s
+DOCA Host decrypt pipe: 1093386.93 pkt/s 1574.53 MB/s
+DOCA Host decrypt pipe: 1089997.08 pkt/s 1569.65 MB/s
+DOCA Host decrypt pipe: 1093898.61 pkt/s 1575.27 MB/s
+DOCA Host decrypt pipe: 1094538.21 pkt/s 1576.19 MB/s
+DOCA Host decrypt pipe: 1095625.52 pkt/s 1577.75 MB/s
+DOCA Host decrypt pipe: 1078420.42 pkt/s 1552.98 MB/s
+DOCA Host decrypt pipe: 1092128.73 pkt/s 1572.72 MB/s
+DOCA Host decrypt pipe: 1087054.95 pkt/s 1565.41 MB/s
+DOCA Host decrypt pipe: 1094666.12 pkt/s 1576.37 MB/s
+DOCA Host decrypt pipe: 1093259.02 pkt/s 1574.35 MB/s
+DOCA Host decrypt pipe: 1092619.42 pkt/s 1573.42 MB/s
+DOCA Authenticated ESP RSS pipe: 2187029.71 pkt/s 3149.43 MB/s
+DOCA Authenticated ESP RSS pipe: 2186262.19 pkt/s 3148.32 MB/s
+DOCA Authenticated ESP RSS pipe: 2180825.64 pkt/s 3140.49 MB/s
+DOCA Authenticated ESP RSS pipe: 2183128.18 pkt/s 3143.81 MB/s
+DOCA Authenticated ESP RSS pipe: 2181593.15 pkt/s 3141.60 MB/s
+DOCA Authenticated ESP RSS pipe: 2190291.64 pkt/s 3154.13 MB/s
+DOCA Authenticated ESP RSS pipe: 2171679.44 pkt/s 3127.32 MB/s
+DOCA Authenticated ESP RSS pipe: 2184746.15 pkt/s 3146.14 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374419.54 pkt/s 6299.38 MB/s
+  lcore=3 queue=1 rate=4381579.27 pkt/s 6309.69 MB/s
+  lcore=4 queue=2 rate=4358847.84 pkt/s 6276.95 MB/s
+  lcore=5 queue=3 rate=4377328.81 pkt/s 6303.56 MB/s
+
+Port 0 statistics:
+  RX rate: 8759525.69 pkt/s 12613.69 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191370.03 pkt/s 3155.23 MB/s (errors=0)
+  RX queue  1: rate=2190629.48 pkt/s 3154.61 MB/s (errors=0)
+  RX queue  2: rate=2186258.08 pkt/s 3148.32 MB/s (errors=0)
+  RX queue  3: rate=2191268.09 pkt/s 3155.53 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8732765.22 pkt/s 12573.04 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183110.60 pkt/s 3143.28 MB/s (errors=0)
+  RX queue  1: rate=2190959.97 pkt/s 3154.36 MB/s (errors=0)
+  RX queue  2: rate=2172669.76 pkt/s 3127.93 MB/s (errors=0)
+  RX queue  3: rate=2186024.88 pkt/s 3147.46 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=169824826 bytes=247264946656
+DOCA software EGRESS host=3 packets=172956326 bytes=251824410656
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095666.08 pkt/s 1577.81 MB/s
+DOCA Host decrypt pipe: 1094514.77 pkt/s 1576.15 MB/s
+DOCA Host decrypt pipe: 1092979.69 pkt/s 1573.94 MB/s
+DOCA Host decrypt pipe: 1094770.62 pkt/s 1576.52 MB/s
+DOCA Host decrypt pipe: 1094509.77 pkt/s 1576.15 MB/s
+DOCA Host decrypt pipe: 1095218.35 pkt/s 1577.17 MB/s
+DOCA Host decrypt pipe: 1092212.14 pkt/s 1572.84 MB/s
+DOCA Host decrypt pipe: 1095538.16 pkt/s 1577.63 MB/s
+DOCA Host decrypt pipe: 1094834.58 pkt/s 1576.61 MB/s
+DOCA Host decrypt pipe: 1095538.16 pkt/s 1577.63 MB/s
+DOCA Host decrypt pipe: 1078524.31 pkt/s 1553.13 MB/s
+DOCA Host decrypt pipe: 1092319.08 pkt/s 1572.99 MB/s
+DOCA Host decrypt pipe: 1087287.08 pkt/s 1565.75 MB/s
+DOCA Host decrypt pipe: 1094770.62 pkt/s 1576.52 MB/s
+DOCA Host decrypt pipe: 1093363.46 pkt/s 1574.50 MB/s
+DOCA Host decrypt pipe: 1092723.84 pkt/s 1573.58 MB/s
+DOCA Authenticated ESP RSS pipe: 2190172.86 pkt/s 3153.95 MB/s
+DOCA Authenticated ESP RSS pipe: 2189733.12 pkt/s 3153.32 MB/s
+DOCA Authenticated ESP RSS pipe: 2185191.83 pkt/s 3146.78 MB/s
+DOCA Authenticated ESP RSS pipe: 2190308.78 pkt/s 3154.15 MB/s
+DOCA Authenticated ESP RSS pipe: 2182121.66 pkt/s 3142.36 MB/s
+DOCA Authenticated ESP RSS pipe: 2190308.78 pkt/s 3154.15 MB/s
+DOCA Authenticated ESP RSS pipe: 2171887.77 pkt/s 3127.62 MB/s
+DOCA Authenticated ESP RSS pipe: 2185044.92 pkt/s 3146.57 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4373106.37 pkt/s 6297.48 MB/s
+  lcore=3 queue=1 rate=4380844.82 pkt/s 6308.63 MB/s
+  lcore=4 queue=2 rate=4358110.18 pkt/s 6275.89 MB/s
+  lcore=5 queue=3 rate=4375984.67 pkt/s 6301.63 MB/s
+
+Port 0 statistics:
+  RX rate: 8757298.05 pkt/s 12610.55 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2190780.90 pkt/s 3154.45 MB/s (errors=0)
+  RX queue  1: rate=2190255.21 pkt/s 3154.07 MB/s (errors=0)
+  RX queue  2: rate=2185813.84 pkt/s 3147.68 MB/s (errors=0)
+  RX queue  3: rate=2190448.10 pkt/s 3154.35 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8730788.07 pkt/s 12570.54 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2182374.71 pkt/s 3142.17 MB/s (errors=0)
+  RX queue  1: rate=2190640.82 pkt/s 3154.10 MB/s (errors=0)
+  RX queue  2: rate=2172219.71 pkt/s 3127.56 MB/s (errors=0)
+  RX queue  3: rate=2185552.83 pkt/s 3146.71 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=178585152 bytes=260019981312
+DOCA software EGRESS host=3 packets=181686973 bytes=264536232688
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095732.59 pkt/s 1577.91 MB/s
+DOCA Host decrypt pipe: 1094325.43 pkt/s 1575.88 MB/s
+DOCA Host decrypt pipe: 1092726.38 pkt/s 1573.58 MB/s
+DOCA Host decrypt pipe: 1094645.24 pkt/s 1576.34 MB/s
+DOCA Host decrypt pipe: 1094458.35 pkt/s 1576.07 MB/s
+DOCA Host decrypt pipe: 1095193.91 pkt/s 1577.13 MB/s
+DOCA Host decrypt pipe: 1092342.60 pkt/s 1573.03 MB/s
+DOCA Host decrypt pipe: 1095540.70 pkt/s 1577.63 MB/s
+DOCA Host decrypt pipe: 1094325.43 pkt/s 1575.88 MB/s
+DOCA Host decrypt pipe: 1095348.82 pkt/s 1577.36 MB/s
+DOCA Host decrypt pipe: 1078015.12 pkt/s 1552.39 MB/s
+DOCA Host decrypt pipe: 1091830.91 pkt/s 1572.29 MB/s
+DOCA Host decrypt pipe: 1086905.84 pkt/s 1565.20 MB/s
+DOCA Host decrypt pipe: 1093877.69 pkt/s 1575.24 MB/s
+DOCA Host decrypt pipe: 1092790.34 pkt/s 1573.67 MB/s
+DOCA Host decrypt pipe: 1092214.68 pkt/s 1572.84 MB/s
+DOCA Authenticated ESP RSS pipe: 2190193.93 pkt/s 3153.98 MB/s
+DOCA Authenticated ESP RSS pipe: 2189517.34 pkt/s 3153.01 MB/s
+DOCA Authenticated ESP RSS pipe: 2185068.98 pkt/s 3146.60 MB/s
+DOCA Authenticated ESP RSS pipe: 2190185.94 pkt/s 3153.97 MB/s
+DOCA Authenticated ESP RSS pipe: 2181231.26 pkt/s 3141.08 MB/s
+DOCA Authenticated ESP RSS pipe: 2189226.51 pkt/s 3152.59 MB/s
+DOCA Authenticated ESP RSS pipe: 2170805.46 pkt/s 3126.06 MB/s
+DOCA Authenticated ESP RSS pipe: 2184045.59 pkt/s 3145.13 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374431.92 pkt/s 6299.39 MB/s
+  lcore=3 queue=1 rate=4382146.02 pkt/s 6310.50 MB/s
+  lcore=4 queue=2 rate=4359113.66 pkt/s 6277.33 MB/s
+  lcore=5 queue=3 rate=4377124.21 pkt/s 6303.27 MB/s
+
+Port 0 statistics:
+  RX rate: 8760034.53 pkt/s 12614.32 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191661.35 pkt/s 3155.55 MB/s (errors=0)
+  RX queue  1: rate=2190876.84 pkt/s 3154.97 MB/s (errors=0)
+  RX queue  2: rate=2186338.66 pkt/s 3148.43 MB/s (errors=0)
+  RX queue  3: rate=2191157.67 pkt/s 3155.37 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8732786.89 pkt/s 12573.41 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2182780.98 pkt/s 3142.94 MB/s (errors=0)
+  RX queue  1: rate=2191287.73 pkt/s 3155.00 MB/s (errors=0)
+  RX queue  2: rate=2172803.14 pkt/s 3128.28 MB/s (errors=0)
+  RX queue  3: rate=2185915.05 pkt/s 3147.20 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=187343490 bytes=272772121440
+DOCA software EGRESS host=3 packets=190420800 bytes=277252684800
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095525.98 pkt/s 1577.61 MB/s
+DOCA Host decrypt pipe: 1094349.70 pkt/s 1575.92 MB/s
+DOCA Host decrypt pipe: 1092583.77 pkt/s 1573.37 MB/s
+DOCA Host decrypt pipe: 1094246.76 pkt/s 1575.77 MB/s
+DOCA Host decrypt pipe: 1094246.76 pkt/s 1575.77 MB/s
+DOCA Host decrypt pipe: 1094849.40 pkt/s 1576.64 MB/s
+DOCA Host decrypt pipe: 1092200.01 pkt/s 1572.82 MB/s
+DOCA Host decrypt pipe: 1095078.26 pkt/s 1576.97 MB/s
+DOCA Host decrypt pipe: 1094566.57 pkt/s 1576.23 MB/s
+DOCA Host decrypt pipe: 1095653.91 pkt/s 1577.79 MB/s
+DOCA Host decrypt pipe: 1078384.40 pkt/s 1552.93 MB/s
+DOCA Host decrypt pipe: 1092200.01 pkt/s 1572.82 MB/s
+DOCA Host decrypt pipe: 1087147.08 pkt/s 1565.54 MB/s
+DOCA Host decrypt pipe: 1094374.68 pkt/s 1575.95 MB/s
+DOCA Host decrypt pipe: 1093415.27 pkt/s 1574.57 MB/s
+DOCA Host decrypt pipe: 1092839.62 pkt/s 1573.74 MB/s
+DOCA Authenticated ESP RSS pipe: 2189772.75 pkt/s 3153.38 MB/s
+DOCA Authenticated ESP RSS pipe: 2189199.09 pkt/s 3152.55 MB/s
+DOCA Authenticated ESP RSS pipe: 2184783.78 pkt/s 3146.19 MB/s
+DOCA Authenticated ESP RSS pipe: 2189325.02 pkt/s 3152.73 MB/s
+DOCA Authenticated ESP RSS pipe: 2181713.64 pkt/s 3141.77 MB/s
+DOCA Authenticated ESP RSS pipe: 2190028.59 pkt/s 3153.75 MB/s
+DOCA Authenticated ESP RSS pipe: 2171799.67 pkt/s 3127.50 MB/s
+DOCA Authenticated ESP RSS pipe: 2185039.62 pkt/s 3146.56 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4373768.12 pkt/s 6298.44 MB/s
+  lcore=3 queue=1 rate=4381635.70 pkt/s 6309.77 MB/s
+  lcore=4 queue=2 rate=4358899.46 pkt/s 6277.03 MB/s
+  lcore=5 queue=3 rate=4377187.20 pkt/s 6303.36 MB/s
+
+Port 0 statistics:
+  RX rate: 8759642.15 pkt/s 12613.96 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191516.87 pkt/s 3155.54 MB/s (errors=0)
+  RX queue  1: rate=2190702.33 pkt/s 3154.72 MB/s (errors=0)
+  RX queue  2: rate=2186313.84 pkt/s 3148.40 MB/s (errors=0)
+  RX queue  3: rate=2191109.10 pkt/s 3155.30 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8731810.19 pkt/s 12572.39 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2182137.00 pkt/s 3141.81 MB/s (errors=0)
+  RX queue  1: rate=2190964.06 pkt/s 3154.63 MB/s (errors=0)
+  RX queue  2: rate=2172606.35 pkt/s 3128.36 MB/s (errors=0)
+  RX queue  3: rate=2186102.78 pkt/s 3147.60 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=196104420 bytes=285528035520
+DOCA software EGRESS host=3 packets=199154656 bytes=289969179136
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1095958.17 pkt/s 1578.23 MB/s
+DOCA Host decrypt pipe: 1094575.94 pkt/s 1576.24 MB/s
+DOCA Host decrypt pipe: 1092951.86 pkt/s 1573.90 MB/s
+DOCA Host decrypt pipe: 1094742.85 pkt/s 1576.48 MB/s
+DOCA Host decrypt pipe: 1094614.92 pkt/s 1576.30 MB/s
+DOCA Host decrypt pipe: 1095254.56 pkt/s 1577.22 MB/s
+DOCA Host decrypt pipe: 1092314.22 pkt/s 1572.99 MB/s
+DOCA Host decrypt pipe: 1095510.42 pkt/s 1577.59 MB/s
+DOCA Host decrypt pipe: 1094870.78 pkt/s 1576.67 MB/s
+DOCA Host decrypt pipe: 1095894.20 pkt/s 1578.14 MB/s
+DOCA Host decrypt pipe: 1078432.05 pkt/s 1552.99 MB/s
+DOCA Host decrypt pipe: 1092384.18 pkt/s 1573.09 MB/s
+DOCA Host decrypt pipe: 1086769.35 pkt/s 1565.00 MB/s
+DOCA Host decrypt pipe: 1094486.99 pkt/s 1576.11 MB/s
+DOCA Host decrypt pipe: 1093399.61 pkt/s 1574.55 MB/s
+DOCA Host decrypt pipe: 1092696.00 pkt/s 1573.53 MB/s
+DOCA Authenticated ESP RSS pipe: 2190573.09 pkt/s 3154.53 MB/s
+DOCA Authenticated ESP RSS pipe: 2189832.51 pkt/s 3153.46 MB/s
+DOCA Authenticated ESP RSS pipe: 2185264.08 pkt/s 3146.89 MB/s
+DOCA Authenticated ESP RSS pipe: 2190253.27 pkt/s 3154.07 MB/s
+DOCA Authenticated ESP RSS pipe: 2181639.12 pkt/s 3141.67 MB/s
+DOCA Authenticated ESP RSS pipe: 2190381.20 pkt/s 3154.25 MB/s
+DOCA Authenticated ESP RSS pipe: 2171831.65 pkt/s 3127.54 MB/s
+DOCA Authenticated ESP RSS pipe: 2185076.19 pkt/s 3146.62 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4367349.75 pkt/s 6289.19 MB/s
+  lcore=3 queue=1 rate=4342529.92 pkt/s 6253.45 MB/s
+  lcore=4 queue=2 rate=4350780.87 pkt/s 6265.33 MB/s
+  lcore=5 queue=3 rate=4369809.24 pkt/s 6292.74 MB/s
+
+Port 0 statistics:
+  RX rate: 8711791.67 pkt/s 12545.01 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2187858.15 pkt/s 3150.23 MB/s (errors=0)
+  RX queue  1: rate=2155490.81 pkt/s 3104.01 MB/s (errors=0)
+  RX queue  2: rate=2182098.65 pkt/s 3142.33 MB/s (errors=0)
+  RX queue  3: rate=2186344.07 pkt/s 3148.44 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8718632.88 pkt/s 12552.93 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2179487.83 pkt/s 3138.01 MB/s (errors=0)
+  RX queue  1: rate=2186994.17 pkt/s 3148.81 MB/s (errors=0)
+  RX queue  2: rate=2168744.50 pkt/s 3122.50 MB/s (errors=0)
+  RX queue  3: rate=2183406.39 pkt/s 3143.61 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=204864928 bytes=298283335168
+DOCA software EGRESS host=3 packets=207887913 bytes=302684801328
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1094415.67 pkt/s 1576.01 MB/s
+DOCA Host decrypt pipe: 1093138.04 pkt/s 1574.17 MB/s
+DOCA Host decrypt pipe: 1091413.25 pkt/s 1571.69 MB/s
+DOCA Host decrypt pipe: 1093265.81 pkt/s 1574.36 MB/s
+DOCA Host decrypt pipe: 1093329.69 pkt/s 1574.45 MB/s
+DOCA Host decrypt pipe: 1093776.86 pkt/s 1575.09 MB/s
+DOCA Host decrypt pipe: 1091091.84 pkt/s 1571.22 MB/s
+DOCA Host decrypt pipe: 1093904.62 pkt/s 1575.28 MB/s
+DOCA Host decrypt pipe: 1093329.69 pkt/s 1574.45 MB/s
+DOCA Host decrypt pipe: 1094160.14 pkt/s 1575.64 MB/s
+DOCA Host decrypt pipe: 1076976.06 pkt/s 1550.90 MB/s
+DOCA Host decrypt pipe: 1091149.73 pkt/s 1571.31 MB/s
+DOCA Host decrypt pipe: 1085194.79 pkt/s 1562.73 MB/s
+DOCA Host decrypt pipe: 1093010.28 pkt/s 1573.99 MB/s
+DOCA Host decrypt pipe: 1092052.06 pkt/s 1572.61 MB/s
+DOCA Host decrypt pipe: 1091285.48 pkt/s 1571.50 MB/s
+DOCA Authenticated ESP RSS pipe: 2187743.36 pkt/s 3150.46 MB/s
+DOCA Authenticated ESP RSS pipe: 2186914.90 pkt/s 3149.26 MB/s
+DOCA Authenticated ESP RSS pipe: 2182507.08 pkt/s 3142.92 MB/s
+DOCA Authenticated ESP RSS pipe: 2187170.42 pkt/s 3149.63 MB/s
+DOCA Authenticated ESP RSS pipe: 2178525.48 pkt/s 3137.18 MB/s
+DOCA Authenticated ESP RSS pipe: 2187170.42 pkt/s 3149.63 MB/s
+DOCA Authenticated ESP RSS pipe: 2169028.11 pkt/s 3123.51 MB/s
+DOCA Authenticated ESP RSS pipe: 2182439.21 pkt/s 3142.82 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4376082.31 pkt/s 6301.77 MB/s
+  lcore=3 queue=1 rate=4381065.30 pkt/s 6308.95 MB/s
+  lcore=4 queue=2 rate=4360900.78 pkt/s 6279.91 MB/s
+  lcore=5 queue=3 rate=4378691.59 pkt/s 6305.53 MB/s
+
+Port 0 statistics:
+  RX rate: 8761169.10 pkt/s 12616.21 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192760.30 pkt/s 3157.38 MB/s (errors=0)
+  RX queue  1: rate=2189309.56 pkt/s 3152.71 MB/s (errors=0)
+  RX queue  2: rate=2187256.28 pkt/s 3149.75 MB/s (errors=0)
+  RX queue  3: rate=2191842.97 pkt/s 3156.36 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8735800.44 pkt/s 12577.63 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183342.46 pkt/s 3143.58 MB/s (errors=0)
+  RX queue  1: rate=2191816.15 pkt/s 3155.71 MB/s (errors=0)
+  RX queue  2: rate=2173674.92 pkt/s 3129.57 MB/s (errors=0)
+  RX queue  3: rate=2186966.91 pkt/s 3148.77 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=213577792 bytes=310969265152
+DOCA software EGRESS host=3 packets=216609375 bytes=315383250000
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1093516.91 pkt/s 1574.72 MB/s
+DOCA Host decrypt pipe: 1060447.87 pkt/s 1527.10 MB/s
+DOCA Host decrypt pipe: 1090446.67 pkt/s 1570.30 MB/s
+DOCA Host decrypt pipe: 1091470.08 pkt/s 1571.77 MB/s
+DOCA Host decrypt pipe: 1093388.98 pkt/s 1574.53 MB/s
+DOCA Host decrypt pipe: 1094028.61 pkt/s 1575.45 MB/s
+DOCA Host decrypt pipe: 1090681.53 pkt/s 1570.63 MB/s
+DOCA Host decrypt pipe: 1093836.72 pkt/s 1575.18 MB/s
+DOCA Host decrypt pipe: 1093069.16 pkt/s 1574.07 MB/s
+DOCA Host decrypt pipe: 1093644.83 pkt/s 1574.90 MB/s
+DOCA Host decrypt pipe: 1076054.92 pkt/s 1549.57 MB/s
+DOCA Host decrypt pipe: 1091342.15 pkt/s 1571.59 MB/s
+DOCA Host decrypt pipe: 1085969.23 pkt/s 1563.85 MB/s
+DOCA Host decrypt pipe: 1092877.27 pkt/s 1573.80 MB/s
+DOCA Host decrypt pipe: 1091981.79 pkt/s 1572.51 MB/s
+DOCA Host decrypt pipe: 1091470.08 pkt/s 1571.77 MB/s
+DOCA Authenticated ESP RSS pipe: 2186907.88 pkt/s 3149.25 MB/s
+DOCA Authenticated ESP RSS pipe: 2154476.48 pkt/s 3102.55 MB/s
+DOCA Authenticated ESP RSS pipe: 2181118.20 pkt/s 3140.92 MB/s
+DOCA Authenticated ESP RSS pipe: 2185306.80 pkt/s 3146.95 MB/s
+DOCA Authenticated ESP RSS pipe: 2179038.40 pkt/s 3137.92 MB/s
+DOCA Authenticated ESP RSS pipe: 2186522.10 pkt/s 3148.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2168036.70 pkt/s 3122.08 MB/s
+DOCA Authenticated ESP RSS pipe: 2182812.23 pkt/s 3143.35 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4374848.63 pkt/s 6299.99 MB/s
+  lcore=3 queue=1 rate=4369702.61 pkt/s 6292.58 MB/s
+  lcore=4 queue=2 rate=4359343.59 pkt/s 6277.66 MB/s
+  lcore=5 queue=3 rate=4376521.67 pkt/s 6302.40 MB/s
+
+Port 0 statistics:
+  RX rate: 8746942.83 pkt/s 12595.60 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2191856.51 pkt/s 3155.96 MB/s (errors=0)
+  RX queue  1: rate=2178240.35 pkt/s 3136.77 MB/s (errors=0)
+  RX queue  2: rate=2186785.43 pkt/s 3149.08 MB/s (errors=0)
+  RX queue  3: rate=2190060.54 pkt/s 3153.79 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8733280.14 pkt/s 12574.09 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2182992.98 pkt/s 3143.05 MB/s (errors=0)
+  RX queue  1: rate=2191405.10 pkt/s 3155.07 MB/s (errors=0)
+  RX queue  2: rate=2172502.06 pkt/s 3128.00 MB/s (errors=0)
+  RX queue  3: rate=2186380.01 pkt/s 3147.97 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=222340125 bytes=323727222000
+DOCA software EGRESS host=3 packets=225346146 bytes=328103988576
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096584.42 pkt/s 1579.13 MB/s
+DOCA Host decrypt pipe: 1092434.81 pkt/s 1573.16 MB/s
+DOCA Host decrypt pipe: 1093258.34 pkt/s 1574.34 MB/s
+DOCA Host decrypt pipe: 1094985.34 pkt/s 1576.83 MB/s
+DOCA Host decrypt pipe: 1095241.20 pkt/s 1577.20 MB/s
+DOCA Host decrypt pipe: 1095880.83 pkt/s 1578.12 MB/s
+DOCA Host decrypt pipe: 1092960.51 pkt/s 1573.92 MB/s
+DOCA Host decrypt pipe: 1095944.79 pkt/s 1578.21 MB/s
+DOCA Host decrypt pipe: 1095113.27 pkt/s 1577.02 MB/s
+DOCA Host decrypt pipe: 1095796.88 pkt/s 1578.00 MB/s
+DOCA Host decrypt pipe: 1078674.74 pkt/s 1553.34 MB/s
+DOCA Host decrypt pipe: 1092938.52 pkt/s 1573.88 MB/s
+DOCA Host decrypt pipe: 1087245.80 pkt/s 1565.69 MB/s
+DOCA Host decrypt pipe: 1095049.31 pkt/s 1576.92 MB/s
+DOCA Host decrypt pipe: 1093834.01 pkt/s 1575.17 MB/s
+DOCA Host decrypt pipe: 1093130.41 pkt/s 1574.16 MB/s
+DOCA Authenticated ESP RSS pipe: 2191825.62 pkt/s 3156.33 MB/s
+DOCA Authenticated ESP RSS pipe: 2188314.64 pkt/s 3151.28 MB/s
+DOCA Authenticated ESP RSS pipe: 2186227.84 pkt/s 3148.27 MB/s
+DOCA Authenticated ESP RSS pipe: 2190930.13 pkt/s 3155.05 MB/s
+DOCA Authenticated ESP RSS pipe: 2182359.07 pkt/s 3142.70 MB/s
+DOCA Authenticated ESP RSS pipe: 2190844.18 pkt/s 3154.92 MB/s
+DOCA Authenticated ESP RSS pipe: 2172508.74 pkt/s 3128.52 MB/s
+DOCA Authenticated ESP RSS pipe: 2186068.93 pkt/s 3148.04 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4368017.59 pkt/s 6290.16 MB/s
+  lcore=3 queue=1 rate=4373710.20 pkt/s 6298.35 MB/s
+  lcore=4 queue=2 rate=4346756.26 pkt/s 6259.54 MB/s
+  lcore=5 queue=3 rate=4371122.74 pkt/s 6294.63 MB/s
+
+Port 0 statistics:
+  RX rate: 8742195.40 pkt/s 12588.72 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2188562.81 pkt/s 3151.17 MB/s (errors=0)
+  RX queue  1: rate=2185997.34 pkt/s 3147.94 MB/s (errors=0)
+  RX queue  2: rate=2179684.08 pkt/s 3138.85 MB/s (errors=0)
+  RX queue  3: rate=2187951.18 pkt/s 3150.76 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8717491.07 pkt/s 12551.28 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2179462.46 pkt/s 3137.88 MB/s (errors=0)
+  RX queue  1: rate=2187758.44 pkt/s 3149.81 MB/s (errors=0)
+  RX queue  2: rate=2167048.99 pkt/s 3120.12 MB/s (errors=0)
+  RX queue  3: rate=2183221.19 pkt/s 3143.47 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=231087783 bytes=336463812048
+DOCA software EGRESS host=3 packets=234061141 bytes=340793021296
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096040.56 pkt/s 1578.35 MB/s
+DOCA Host decrypt pipe: 1081577.31 pkt/s 1557.52 MB/s
+DOCA Host decrypt pipe: 1093162.30 pkt/s 1574.21 MB/s
+DOCA Host decrypt pipe: 1093290.22 pkt/s 1574.39 MB/s
+DOCA Host decrypt pipe: 1094633.41 pkt/s 1576.32 MB/s
+DOCA Host decrypt pipe: 1095464.91 pkt/s 1577.52 MB/s
+DOCA Host decrypt pipe: 1092649.61 pkt/s 1573.47 MB/s
+DOCA Host decrypt pipe: 1095562.85 pkt/s 1577.66 MB/s
+DOCA Host decrypt pipe: 1092811.51 pkt/s 1573.70 MB/s
+DOCA Host decrypt pipe: 1093182.29 pkt/s 1574.24 MB/s
+DOCA Host decrypt pipe: 1073270.34 pkt/s 1545.56 MB/s
+DOCA Host decrypt pipe: 1090475.93 pkt/s 1570.34 MB/s
+DOCA Host decrypt pipe: 1084975.26 pkt/s 1562.42 MB/s
+DOCA Host decrypt pipe: 1092586.65 pkt/s 1573.38 MB/s
+DOCA Host decrypt pipe: 1091538.29 pkt/s 1571.87 MB/s
+DOCA Host decrypt pipe: 1090795.73 pkt/s 1570.80 MB/s
+DOCA Authenticated ESP RSS pipe: 2190673.97 pkt/s 3154.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2177043.22 pkt/s 3135.05 MB/s
+DOCA Authenticated ESP RSS pipe: 2185812.91 pkt/s 3147.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2188850.08 pkt/s 3152.05 MB/s
+DOCA Authenticated ESP RSS pipe: 2177782.78 pkt/s 3136.11 MB/s
+DOCA Authenticated ESP RSS pipe: 2185770.94 pkt/s 3147.62 MB/s
+DOCA Authenticated ESP RSS pipe: 2164808.63 pkt/s 3117.43 MB/s
+DOCA Authenticated ESP RSS pipe: 2181271.66 pkt/s 3141.14 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=4375876.05 pkt/s 6301.47 MB/s
+  lcore=3 queue=1 rate=4383871.25 pkt/s 6312.99 MB/s
+  lcore=4 queue=2 rate=4355821.07 pkt/s 6272.59 MB/s
+  lcore=5 queue=3 rate=4379425.92 pkt/s 6306.58 MB/s
+
+Port 0 statistics:
+  RX rate: 8758365.61 pkt/s 12612.03 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2192655.80 pkt/s 3157.09 MB/s (errors=0)
+  RX queue  1: rate=2191629.42 pkt/s 3156.05 MB/s (errors=0)
+  RX queue  2: rate=2181931.27 pkt/s 3142.09 MB/s (errors=0)
+  RX queue  3: rate=2192149.11 pkt/s 3156.80 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 8736553.47 pkt/s 12578.97 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=2183253.88 pkt/s 3143.52 MB/s (errors=0)
+  RX queue  1: rate=2192191.66 pkt/s 3156.29 MB/s (errors=0)
+  RX queue  2: rate=2173873.36 pkt/s 3129.99 MB/s (errors=0)
+  RX queue  3: rate=2187234.56 pkt/s 3149.18 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=239830819 bytes=349193672464
+DOCA software EGRESS host=3 packets=242797766 bytes=353513547296
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1094338.09 pkt/s 1575.90 MB/s
+DOCA Host decrypt pipe: 1091203.92 pkt/s 1571.39 MB/s
+DOCA Host decrypt pipe: 1087366.15 pkt/s 1565.86 MB/s
+DOCA Host decrypt pipe: 1092866.95 pkt/s 1573.78 MB/s
+DOCA Host decrypt pipe: 1093314.69 pkt/s 1574.43 MB/s
+DOCA Host decrypt pipe: 1093826.39 pkt/s 1575.16 MB/s
+DOCA Host decrypt pipe: 1091012.03 pkt/s 1571.11 MB/s
+DOCA Host decrypt pipe: 1094176.19 pkt/s 1575.67 MB/s
+DOCA Host decrypt pipe: 1095072.66 pkt/s 1576.96 MB/s
+DOCA Host decrypt pipe: 1096001.12 pkt/s 1578.29 MB/s
+DOCA Host decrypt pipe: 1078987.04 pkt/s 1553.79 MB/s
+DOCA Host decrypt pipe: 1092675.06 pkt/s 1573.50 MB/s
+DOCA Host decrypt pipe: 1087046.34 pkt/s 1565.40 MB/s
+DOCA Host decrypt pipe: 1094849.79 pkt/s 1576.64 MB/s
+DOCA Host decrypt pipe: 1093733.44 pkt/s 1575.03 MB/s
+DOCA Host decrypt pipe: 1093186.76 pkt/s 1574.24 MB/s
+DOCA Authenticated ESP RSS pipe: 2187652.78 pkt/s 3150.33 MB/s
+DOCA Authenticated ESP RSS pipe: 2185030.31 pkt/s 3146.55 MB/s
+DOCA Authenticated ESP RSS pipe: 2178378.18 pkt/s 3136.97 MB/s
+DOCA Authenticated ESP RSS pipe: 2187046.13 pkt/s 3149.45 MB/s
+DOCA Authenticated ESP RSS pipe: 2182123.00 pkt/s 3142.36 MB/s
+DOCA Authenticated ESP RSS pipe: 2190850.91 pkt/s 3154.93 MB/s
+DOCA Authenticated ESP RSS pipe: 2172712.49 pkt/s 3128.81 MB/s
+DOCA Authenticated ESP RSS pipe: 2185861.82 pkt/s 3147.75 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=2852523.87 pkt/s 4107.77 MB/s
+  lcore=3 queue=1 rate=2857609.05 pkt/s 4115.09 MB/s
+  lcore=4 queue=2 rate=2839347.19 pkt/s 4088.80 MB/s
+  lcore=5 queue=3 rate=2854442.81 pkt/s 4110.54 MB/s
+
+Port 0 statistics:
+  RX rate: 5708748.58 pkt/s 8220.58 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=1429041.63 pkt/s 2057.60 MB/s (errors=0)
+  RX queue  1: rate=1428599.87 pkt/s 2057.25 MB/s (errors=0)
+  RX queue  2: rate=1422195.38 pkt/s 2048.03 MB/s (errors=0)
+  RX queue  3: rate=1428911.70 pkt/s 2057.70 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 5693194.86 pkt/s 8196.85 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=1422896.68 pkt/s 2048.71 MB/s (errors=0)
+  RX queue  1: rate=1428528.60 pkt/s 2056.67 MB/s (errors=0)
+  RX queue  2: rate=1416695.09 pkt/s 2039.71 MB/s (errors=0)
+  RX queue  3: rate=1425074.49 pkt/s 2051.76 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=248589851 bytes=361946823056
+DOCA software EGRESS host=3 packets=251537507 bytes=366238610192
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 1096371.39 pkt/s 1578.83 MB/s
+DOCA Host decrypt pipe: 1095028.11 pkt/s 1576.89 MB/s
+DOCA Host decrypt pipe: 1087863.96 pkt/s 1566.58 MB/s
+DOCA Host decrypt pipe: 1095092.08 pkt/s 1576.99 MB/s
+DOCA Host decrypt pipe: 1095156.04 pkt/s 1577.08 MB/s
+DOCA Host decrypt pipe: 1095667.77 pkt/s 1577.81 MB/s
+DOCA Host decrypt pipe: 1092981.21 pkt/s 1573.95 MB/s
+DOCA Host decrypt pipe: 1096051.56 pkt/s 1578.37 MB/s
+DOCA Host decrypt pipe: 1095667.77 pkt/s 1577.81 MB/s
+DOCA Host decrypt pipe: 1096307.42 pkt/s 1578.74 MB/s
+DOCA Host decrypt pipe: 1079356.52 pkt/s 1554.33 MB/s
+DOCA Host decrypt pipe: 1093173.11 pkt/s 1574.22 MB/s
+DOCA Host decrypt pipe: 1087288.27 pkt/s 1565.75 MB/s
+DOCA Host decrypt pipe: 1095603.80 pkt/s 1577.72 MB/s
+DOCA Host decrypt pipe: 1094186.56 pkt/s 1575.68 MB/s
+DOCA Host decrypt pipe: 1093492.93 pkt/s 1574.68 MB/s
+DOCA Authenticated ESP RSS pipe: 2191527.43 pkt/s 3155.91 MB/s
+DOCA Authenticated ESP RSS pipe: 2190695.88 pkt/s 3154.71 MB/s
+DOCA Authenticated ESP RSS pipe: 2180845.17 pkt/s 3140.52 MB/s
+DOCA Authenticated ESP RSS pipe: 2191143.64 pkt/s 3155.35 MB/s
+DOCA Authenticated ESP RSS pipe: 2182956.03 pkt/s 3143.56 MB/s
+DOCA Authenticated ESP RSS pipe: 2191911.22 pkt/s 3156.46 MB/s
+DOCA Authenticated ESP RSS pipe: 2173551.08 pkt/s 3130.02 MB/s
+DOCA Authenticated ESP RSS pipe: 2186666.04 pkt/s 3148.90 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 646108.98 pkt/s 930.43 MB/s
+DOCA Host decrypt pipe: 645341.40 pkt/s 929.32 MB/s
+DOCA Host decrypt pipe: 641247.65 pkt/s 923.43 MB/s
+DOCA Host decrypt pipe: 645469.33 pkt/s 929.51 MB/s
+DOCA Host decrypt pipe: 645597.26 pkt/s 929.69 MB/s
+DOCA Host decrypt pipe: 645917.09 pkt/s 930.15 MB/s
+DOCA Host decrypt pipe: 644254.00 pkt/s 927.76 MB/s
+DOCA Host decrypt pipe: 646108.98 pkt/s 930.43 MB/s
+DOCA Host decrypt pipe: 187480.98 pkt/s 269.98 MB/s
+DOCA Host decrypt pipe: 187544.95 pkt/s 270.07 MB/s
+DOCA Host decrypt pipe: 184666.53 pkt/s 265.93 MB/s
+DOCA Host decrypt pipe: 187033.23 pkt/s 269.34 MB/s
+DOCA Host decrypt pipe: 186073.76 pkt/s 267.96 MB/s
+DOCA Host decrypt pipe: 187480.98 pkt/s 269.98 MB/s
+DOCA Host decrypt pipe: 187225.13 pkt/s 269.61 MB/s
+DOCA Host decrypt pipe: 187161.16 pkt/s 269.52 MB/s
+DOCA Authenticated ESP RSS pipe: 1291706.24 pkt/s 1860.12 MB/s
+DOCA Authenticated ESP RSS pipe: 1291258.49 pkt/s 1859.47 MB/s
+DOCA Authenticated ESP RSS pipe: 1285501.65 pkt/s 1851.18 MB/s
+DOCA Authenticated ESP RSS pipe: 1291578.32 pkt/s 1859.94 MB/s
+DOCA Authenticated ESP RSS pipe: 373554.74 pkt/s 537.94 MB/s
+DOCA Authenticated ESP RSS pipe: 375025.93 pkt/s 540.06 MB/s
+DOCA Authenticated ESP RSS pipe: 371891.66 pkt/s 535.54 MB/s
+DOCA Authenticated ESP RSS pipe: 374194.39 pkt/s 538.86 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+
+=== monitoring snapshot ===
+Worker statistics:
+  lcore=2 queue=0 rate=0.00 pkt/s 0.00 MB/s
+  lcore=3 queue=1 rate=0.00 pkt/s 0.00 MB/s
+  lcore=4 queue=2 rate=0.00 pkt/s 0.00 MB/s
+  lcore=5 queue=3 rate=0.00 pkt/s 0.00 MB/s
+
+Port 0 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+
+Port 1 statistics:
+  RX rate: 0.00 pkt/s 0.00 MB/s (missed=0 errors=0 no_mbuf=0)
+  RX queue  0: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  1: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  2: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+  RX queue  3: rate=0.00 pkt/s 0.00 MB/s (errors=0)
+DOCA software EGRESS host=2 packets=253752896 bytes=369464216576
+DOCA software EGRESS host=3 packets=253033152 bytes=368416269312
+DOCA ARP port=0 to_host=0 to_uplink=0
+DOCA ARP port=1 to_host=0 to_uplink=0
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA To-Host pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Host decrypt pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Authenticated ESP RSS pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+DOCA Drop pipe: 0.00 pkt/s 0.00 MB/s
+[07:20:48:218915][3111509792][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=0 queue=0 packets=31763072
+[07:20:48:218955][3111509792][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=4 queue=0 packets=31731648
+[07:20:48:218958][3111509792][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=8 queue=0 packets=31744000
+[07:20:48:218961][3111509792][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=12 queue=0 packets=31507968
+[07:20:48:218963][3111509792][DOCA][INF][monitoring_dpdk.cpp:182][monitoring_dpdk_worker_loop] linearized queue=0 packets=0
+[07:20:48:218965][3111509792][DOCA][INF][monitoring_dpdk.cpp:183][monitoring_dpdk_worker_loop] ESP totals queue=0 accepted=126746688 malformed=0 unauthenticated=0 replay=0 tx=126746688 tx_drop=0 tx_bytes=184543177728
+[07:20:48:218915][3094601504][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=2 queue=2 packets=31653824
+[07:20:48:218985][3094601504][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=6 queue=2 packets=31666048
+[07:20:48:218989][3094601504][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=10 queue=2 packets=31264896
+[07:20:48:218991][3094601504][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=14 queue=2 packets=31691008
+[07:20:48:218995][3094601504][DOCA][INF][monitoring_dpdk.cpp:182][monitoring_dpdk_worker_loop] linearized queue=2 packets=0
+[07:20:48:218997][3094601504][DOCA][INF][monitoring_dpdk.cpp:183][monitoring_dpdk_worker_loop] ESP totals queue=2 accepted=126275776 malformed=0 unauthenticated=0 replay=0 tx=126275776 tx_drop=0 tx_bytes=183857529856
+[07:20:48:218915][3103055648][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=1 queue=1 packets=31697856
+[07:20:48:219014][3103055648][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=5 queue=1 packets=31750336
+[07:20:48:218915][3086147360][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=3 queue=3 packets=31734784
+[07:20:48:219030][3086147360][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=7 queue=3 packets=31755328
+[07:20:48:219033][3086147360][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=11 queue=3 packets=31663744
+[07:20:48:219039][3086147360][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=15 queue=3 packets=31672320
+[07:20:48:219050][3086147360][DOCA][INF][monitoring_dpdk.cpp:182][monitoring_dpdk_worker_loop] linearized queue=3 packets=0
+[07:20:48:219052][3086147360][DOCA][INF][monitoring_dpdk.cpp:183][monitoring_dpdk_worker_loop] ESP totals queue=3 accepted=126826176 malformed=0 unauthenticated=0 replay=0 tx=126826176 tx_drop=0 tx_bytes=184658912256
+[07:20:48:219018][3103055648][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=9 queue=1 packets=31756864
+[07:20:48:219063][3103055648][DOCA][INF][monitoring_dpdk.cpp:181][monitoring_dpdk_worker_loop] RSS SA=13 queue=1 packets=31732352
+[07:20:48:219067][3103055648][DOCA][INF][monitoring_dpdk.cpp:182][monitoring_dpdk_worker_loop] linearized queue=1 packets=0
+[07:20:48:219070][3103055648][DOCA][INF][monitoring_dpdk.cpp:183][monitoring_dpdk_worker_loop] ESP totals queue=1 accepted=126937408 malformed=0 unauthenticated=0 replay=0 tx=126937408 tx_drop=0 tx_bytes=184820866048
+[07:20:48:309688][3201582432][DOCA][INF][monitoring_doca.cpp:274][~MonitoringDoca] DOCA port stopped (port=3)
+[07:20:48:310013][3201582432][DOCA][INF][monitoring_doca.cpp:274][~MonitoringDoca] DOCA port stopped (port=2)
+[07:20:48:979734][3201582432][DOCA][INF][monitoring_doca.cpp:274][~MonitoringDoca] DOCA port stopped (port=1)
+[07:20:49:560685][3201582432][DOCA][INF][monitoring_doca.cpp:274][~MonitoringDoca] DOCA port stopped (port=0)
+[07:20:49:561124][3201582432][DOCA][INF][monitoring_doca.cpp:278][~MonitoringDoca] DOCA flow destroyed
+[07:20:49:561158][3201582432][DOCA][INF][monitoring_dpdk.cpp:270][~MonitoringDpdk] DPDK shutdown

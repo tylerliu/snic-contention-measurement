@@ -1,0 +1,27 @@
+# Native build products and Meson/Ninja build trees.
+build/
+build-*/
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+compile_commands.json
+
+# Editor indexes, Python caches, and local environments.
+.cache/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Keep benchmark .log files, CSV/JSON results, YAML configurations, and
+# source tests visible: these are part of the reproducibility evidence.
+# Standalone benchmark binaries are covered by ipsec-arm-encap/.gitignore.
+
+# Local author preparation notes.
+/LOCAL_ARTIFACT_NOTES.md
