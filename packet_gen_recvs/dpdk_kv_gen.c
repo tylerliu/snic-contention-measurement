@@ -189,6 +189,7 @@ static void print_usage(const char *prog) {
     printf("                       <fraction>: 0.0-1.0 probability of choosing port2.\n");
     printf("  -s, --src-ip IP      Per-TX-port Source IP. \n");
     printf("  -d, --tx-dst-ip IP   Per-TX-port Destination IP.\n");
+    printf("      --dst-mac MAC   Optional unicast MAC; repeat in TX-device order, bypass ARP.\n");
     printf("  -z, --size SIZE      Payload size in bytes (max: %d)\n", MAX_PAYLOAD_SIZE);
     printf("  -a, --device DEVICE  Device to use (can specify multiple times)\n");
     printf("  -l, --lcores LCORES  Logical cores to use (e.g., 0-3, 0,2,4)\n");
@@ -393,11 +394,14 @@ int main(int argc, char **argv) {
     // Per-TX device overrides
     const char *per_tx_src_ips[64]; memset(per_tx_src_ips, 0, sizeof(per_tx_src_ips)); uint16_t per_tx_src_count = 0;
     const char *per_tx_dst_ips[64]; memset(per_tx_dst_ips, 0, sizeof(per_tx_dst_ips)); uint16_t per_tx_dst_count = 0;
+    const char *per_tx_dst_macs[64] = {0};
+    uint16_t per_tx_dst_mac_count = 0;
     static struct option long_options[] = {
         {"help", no_argument, 0, 'h'},
         {"port", required_argument, 0, 'p'},
         {"src-ip", required_argument, 0, 's'},
         {"tx-dst-ip", required_argument, 0, 'd'},
+        {"dst-mac", required_argument, 0, 6},
         {"size", required_argument, 0, 'z'},
         {"device", required_argument, 0, 'a'},
         {"lcores", required_argument, 0, 'l'},
@@ -507,6 +511,13 @@ int main(int argc, char **argv) {
                     global_reflector_devices[global_reflector_device_count++] = optarg;
                     global_reflector_enabled = 1;
                 }
+                break;
+            case 6: // --dst-mac, in TX-device order
+                if (per_tx_dst_mac_count >= 64) {
+                    fprintf(stderr, "Too many --dst-mac values.\n");
+                    return 1;
+                }
+                per_tx_dst_macs[per_tx_dst_mac_count++] = optarg;
                 break;
             case 'S':
                 global_show_per_port_stats = 1;
@@ -681,10 +692,24 @@ int main(int argc, char **argv) {
     // Allocate VXLAN arrays
     global_tx_src_addrs = calloc(num_ports ? num_ports : 1, sizeof(struct in_addr));
     global_tx_dst_addrs = calloc(num_ports ? num_ports : 1, sizeof(struct in_addr));
+    if (per_tx_dst_mac_count && per_tx_dst_mac_count != global_num_tx_ports) {
+        fprintf(stderr, "Provide one --dst-mac per TX device, or omit all for ARP.\n");
+        return 1;
+    }
     // Populate per-port source/destination IPs in TX device order
     for (uint16_t i = 0; i < global_num_tx_ports; i++) {
         uint16_t pid = global_tx_port_ids[i];
         if (pid >= num_ports) continue;
+        if (per_tx_dst_mac_count) {
+            struct rte_ether_addr mac;
+            if (rte_ether_unformat_addr(per_tx_dst_macs[i], &mac) != 0 ||
+                !rte_is_valid_assigned_ether_addr(&mac)) {
+                fprintf(stderr, "Invalid unicast --dst-mac: %s\n", per_tx_dst_macs[i]);
+                return 1;
+            }
+            global_tx_dst_macs[pid] = mac;
+            printf("Explicit destination MAC on port %u: %s\n", pid, per_tx_dst_macs[i]);
+        }
         struct in_addr s = (struct in_addr){0};
         struct in_addr d = (struct in_addr){0};
         if (i < per_tx_src_count) inet_aton(per_tx_src_ips[i], &s);

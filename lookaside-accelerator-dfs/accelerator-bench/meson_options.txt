@@ -1,0 +1,2 @@
+option('nb_descriptors', type: 'integer', value: 128, description: 'Queue descriptor count for cryptodev and compressdev benchmarks')
+

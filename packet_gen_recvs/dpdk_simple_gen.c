@@ -58,7 +58,6 @@ static int global_measure_pause = 0;
 static uint64_t global_cycles_paused[RTE_MAX_LCORE] __rte_cache_aligned;
 
 // Reflector device globals
-// Reflector device globals
 static const char *global_reflector_devices[64];
 static uint16_t global_reflector_device_count = 0;
 static uint16_t global_reflector_port_ids[64];
@@ -372,7 +371,7 @@ static int packet_worker(__rte_unused void *dummy) {
                 rte_pktmbuf_free(m);
                 break;
             }
-            pending[BATCH_SIZE - pending_count - 1] = m;
+            pending[pending_count] = m;
             pending_count++;
         }
 
@@ -384,6 +383,10 @@ static int packet_worker(__rte_unused void *dummy) {
         if (pending_count > 0) {
             sent = rte_eth_tx_burst(port_id, port_queue_id, pending, pending_count);
             pending_count -= sent;
+            // Only the unsent tail remains owned by this worker.
+            if (sent > 0 && pending_count > 0) {
+                memmove(pending, pending + sent, pending_count * sizeof(*pending));
+            }
             if (sent == 0) rte_pause();
         }
         

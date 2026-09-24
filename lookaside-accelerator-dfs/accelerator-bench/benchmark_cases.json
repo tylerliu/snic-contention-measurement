@@ -1,0 +1,70 @@
+{
+  "rte_cryptodev_enqueue_dequeue_burst_decrypt": {
+    "params": {
+      "burst_size": [64]
+    },
+    "grouped_params": {
+      "algorithm_config": [
+        {"data_size": 512, "num_queues": 2},
+        {"data_size": 2048, "num_queues": 1},
+        {"data_size": 8192, "num_queues": 1},
+        {"data_size": 32000, "num_queues": 1}
+      ]
+    },
+    "eal_args": ["-a", "03:00.0,class=crypto,algo=1"]
+  },
+  "rte_cryptodev_enqueue_dequeue_burst_encrypt": {
+    "params": {
+      "burst_size": [64]
+    },
+    "grouped_params": {
+      "algorithm_config": [
+        {"data_size": 512, "num_queues": 2},
+        {"data_size": 2048, "num_queues": 1},
+        {"data_size": 8192, "num_queues": 1},
+        {"data_size": 32000, "num_queues": 1}
+      ]
+    },
+    "eal_args": ["-a", "03:00.0,class=crypto,algo=1"]
+  },
+  "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt": {
+    "params": {
+      "burst_size": [64],
+      "data_size": [512, 2048, 8192, 32000],
+      "num_queues": [3]
+    },
+    "eal_args": ["-a", "03:00.0,class=crypto,algo=0"]
+  },
+  "rte_cryptodev_enqueue_dequeue_burst_xts_encrypt": {
+    "params": {
+      "burst_size": [64],
+      "data_size": [512, 2048, 8192, 32000],
+      "num_queues": [3]
+    },
+    "eal_args": ["-a", "03:00.0,class=crypto,algo=0"]
+  },
+  "rte_compressdev_enqueue_dequeue_burst_decompress": {
+    "setup_command": "python3 generate_compressed_data.py --output-dir compressed_data --data-sizes 512 2048 8192 32000 --data-types random text --algorithms deflate lz4 null",
+    "params": {
+      "burst_size": [64],
+      "data_size": [512, 2048, 8192, 32000],
+      "num_queues": [1],
+      "data_dir": ["compressed_data"]
+    },
+    "grouped_params": {
+      "algorithm_config": [
+        {"algorithm": "deflate", "checksum": "none"},
+        {"algorithm": "lz4", "checksum": "none"},
+        {"algorithm": "lz4", "checksum": "xxhash32"},
+        {"algorithm": "null", "checksum": "none"},
+        {"algorithm": "null", "checksum": "crc32"},
+        {"algorithm": "null", "checksum": "adler32"},
+        {"algorithm": "null", "checksum": "combined"}
+      ]
+    },
+    "eal_args": ["-a", "03:00.0,class=compress"]
+  },
+  "get_tsc_hz": {
+    "eal_args": ["-l", "3", "--no-huge"]
+  }
+}

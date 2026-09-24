@@ -1,0 +1,5 @@
+# DPA packet aggregation
+
+Aggregates 128 unsigned 64-bit values per source-port group and sends `-k` copies of the sum after `-k` input packets. The existing KV generator places six random key bytes before the 128 little-endian values. DPA skips those six bytes and indexes by UDP source port; the ARM comparison hashes them together with the shifted source port. The default UDP destination port is 1234 and threshold is 10. `-t` selects DPA threads, `-a` places packet receive storage on ARM memory, `-m` selects the outgoing source MAC, and `-s` is ignored. The separate `dpdk_mapreduce` Meson project supplies an ARM comparison.
+
+Follow the [reproduction guide](../README.md) for DOCA 3.1 container setup, builds, launch commands, correctness checks, firmware/runtime troubleshooting, and measurement limits. Each FlexIO project builds its own `build-doca31/host/flexio_packet_processor`. Native execution requires matching SDK libraries; use the shared [DOCA 3.1 Docker setup](../../README.md#doca-31-docker-setup) for both build and runtime.

@@ -56,6 +56,7 @@ static void print_usage(const char *prog) {
     printf("  -f, --file-prefix P  DPDK file-prefix\n");
     printf("  -v, --vxlan IP:PORT  VXLAN decap match outer dst IP:port (repeat)\n");
     printf("  -M, --mbufs N        Number of mbufs in pool (default 8192)\n");
+    printf("  -W, --rx-workers N   Total RX workers (default one per port)\n");
     printf("  -S, --per-port-stats Show per-port statistics (default: totals only)\n");
     printf("      --rx-ip IP       Respond to ARP for this IP per port (repeat)\n");
     printf("  -h, --help           Show this help\n");
@@ -71,6 +72,7 @@ int main(int argc, char **argv) {
         {"vxlan", required_argument, 0, 'v'},
         {"file-prefix", required_argument, 0, 'f'},
         {"mbufs", required_argument, 0, 'M'},
+        {"rx-workers", required_argument, 0, 'W'},
         {"per-port-stats", no_argument, 0, 'S'},
         {"rx-ip", required_argument, 0, 1},
         {0, 0, 0, 0}
@@ -83,9 +85,10 @@ int main(int argc, char **argv) {
     const char *file_prefix = NULL;
     const char *rx_ip_strs[64];
     uint16_t rx_ip_count = 0;
+    uint16_t requested_rx_workers = 0;
 
     const char *vxlan_specs[64]; uint16_t vxlan_spec_count = 0;
-    while ((opt = getopt_long(argc, argv, "hp:a:l:v:f:M:S", long_options, NULL)) != -1) {
+    while ((opt = getopt_long(argc, argv, "hp:a:l:v:f:M:W:S", long_options, NULL)) != -1) {
         switch (opt) {
             case 'h':
                 print_usage(argv[0]);
@@ -114,6 +117,16 @@ int main(int argc, char **argv) {
             case 'M':
                 /* parsed later */
                 break;
+            case 'W': {
+                char *end = NULL;
+                long count = strtol(optarg, &end, 10);
+                if (end == optarg || *end != '\0' || count < 1 || count >= RTE_MAX_LCORE) {
+                    fprintf(stderr, "Invalid --rx-workers value: %s\n", optarg);
+                    return 1;
+                }
+                requested_rx_workers = (uint16_t)count;
+                break;
+            }
             case 'S':
                 global_show_per_port_stats = 1;
                 break;
@@ -172,13 +185,18 @@ int main(int argc, char **argv) {
     printf("Total lcores: %d, Main lcore: %d, Worker lcores available: %d\n",
            total_lcores, main_lcore, available_workers);
 
-    if (available_workers < num_ports_to_use) {
-        fprintf(stderr, "Need at least %u worker lcores (one per port). Provide more cores via -l.\n", num_ports_to_use);
+    global_worker_count = requested_rx_workers ? requested_rx_workers : num_ports_to_use;
+    if (global_worker_count < num_ports_to_use ||
+        global_worker_count % num_ports_to_use != 0) {
+        fprintf(stderr, "RX workers must be a positive multiple of the %u ports\n", num_ports_to_use);
         return 1;
     }
-    global_worker_count = num_ports_to_use;
+    if (available_workers < global_worker_count) {
+        fprintf(stderr, "Need %u worker lcores; provide main plus workers via -l.\n", global_worker_count);
+        return 1;
+    }
 
-    uint16_t queues_per_port = 1;
+    uint16_t queues_per_port = global_worker_count / num_ports_to_use;
     global_rx_queues_per_port = queues_per_port;
     printf("Setting up %u RX queue(s) per port (%u total)\n",
            queues_per_port, queues_per_port * num_ports_to_use);
@@ -187,7 +205,7 @@ int main(int argc, char **argv) {
     uint32_t mbuf_pool_size = 8192;
     // Re-parse for -M/--mbufs
     optind = 1;
-    while ((opt = getopt_long(argc, argv, "hp:a:l:v:f:M:S", long_options, NULL)) != -1) {
+    while ((opt = getopt_long(argc, argv, "hp:a:l:v:f:M:W:S", long_options, NULL)) != -1) {
         if (opt == 'M') {
             long v = strtol(optarg, NULL, 10);
             if (v > 0) mbuf_pool_size = (uint32_t)v;
@@ -202,6 +220,10 @@ int main(int argc, char **argv) {
     // Configure and start all ports for RX
     struct rte_eth_conf port_conf;
     memset(&port_conf, 0, sizeof(port_conf));
+    if (queues_per_port > 1) {
+        port_conf.rxmode.mq_mode = RTE_ETH_MQ_RX_RSS;
+        port_conf.rx_adv_conf.rss_conf.rss_hf = RTE_ETH_RSS_IP | RTE_ETH_RSS_UDP;
+    }
 
     global_port_ids = malloc(num_ports_to_use * sizeof(uint16_t));
     if (!global_port_ids) {
@@ -216,7 +238,24 @@ int main(int argc, char **argv) {
             return 1;
         }
 
-        ret = rte_eth_dev_configure(port_id, queues_per_port, 1, &port_conf);
+        struct rte_eth_dev_info dev_info;
+        ret = rte_eth_dev_info_get(port_id, &dev_info);
+        if (ret < 0) {
+            fprintf(stderr, "Failed to query port %d capabilities\n", port_id);
+            free(global_port_ids);
+            return 1;
+        }
+        if (queues_per_port > dev_info.max_rx_queues ||
+            queues_per_port > dev_info.max_tx_queues) {
+            fprintf(stderr, "Port %d supports only %u RX and %u TX queues\n",
+                    port_id, dev_info.max_rx_queues, dev_info.max_tx_queues);
+            free(global_port_ids);
+            return 1;
+        }
+        if (queues_per_port > 1)
+            port_conf.rx_adv_conf.rss_conf.rss_hf =
+                (RTE_ETH_RSS_IP | RTE_ETH_RSS_UDP) & dev_info.flow_type_rss_offloads;
+        ret = rte_eth_dev_configure(port_id, queues_per_port, queues_per_port, &port_conf);
         if (ret < 0) {
             fprintf(stderr, "Failed to configure port %d with %d RX queues\n", port_id, queues_per_port);
             free(global_port_ids);
@@ -236,11 +275,14 @@ int main(int argc, char **argv) {
 
         struct rte_eth_txconf txq_conf;
         memset(&txq_conf, 0, sizeof(txq_conf));
-        ret = rte_eth_tx_queue_setup(port_id, 0, 1024, rte_eth_dev_socket_id(port_id), &txq_conf);
-        if (ret < 0) {
-            fprintf(stderr, "Failed to setup TX queue on port %d\n", port_id);
-            free(global_port_ids);
-            return 1;
+        for (uint16_t q = 0; q < queues_per_port; q++) {
+            ret = rte_eth_tx_queue_setup(port_id, q, 1024,
+                                         rte_eth_dev_socket_id(port_id), &txq_conf);
+            if (ret < 0) {
+                fprintf(stderr, "Failed to setup TX queue %u on port %d\n", q, port_id);
+                free(global_port_ids);
+                return 1;
+            }
         }
 
         ret = rte_eth_dev_start(port_id);
@@ -306,14 +348,14 @@ int main(int argc, char **argv) {
     unsigned int lc = rte_get_next_lcore(-1, 1, 0);
     uint16_t worker_idx = 0;
     while (lc < RTE_MAX_LCORE && worker_idx < global_worker_count) {
-        uint16_t port_id = global_port_ids ? global_port_ids[worker_idx] : 0;
-        uint16_t queue_id = 0;
+        uint16_t port_id = global_port_ids[worker_idx % global_num_ports];
+        uint16_t queue_id = worker_idx / global_num_ports;
         struct dpdk_shared_rx_worker_ctx *ctx = &global_rx_worker_ctx[worker_idx];
         memset(ctx, 0, sizeof(*ctx));
         ctx->running = &global_running;
         ctx->port_id = port_id;
         ctx->rx_queue_id = queue_id;
-        ctx->tx_queue_id = 0;
+        ctx->tx_queue_id = queue_id;
         ctx->filter_udp_port = global_filter_port;
         ctx->warn_on_mismatch = 1;
         ctx->port_macs = global_src_macs;

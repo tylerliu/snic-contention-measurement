@@ -1,0 +1,5 @@
+option('enable_asan', type: 'boolean', value: false, description: 'Enable AddressSanitizer (ASan)')
+option('enable_tsan', type: 'boolean', value: false, description: 'Enable ThreadSanitizer (TSan)')
+option('enable_crypto', type : 'boolean', value : false, description : 'Enable crypto offload')
+option('enable_compress', type : 'boolean', value : false, description : 'Enable compression offload')
+

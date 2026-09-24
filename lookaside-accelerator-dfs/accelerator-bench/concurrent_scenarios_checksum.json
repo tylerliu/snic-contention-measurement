@@ -1,0 +1,40 @@
+{
+  "import_cases": "benchmark_cases.json",
+  "groups": [
+    {
+      "name": "compression-lz4-checksum-variants",
+      "shared_params": {
+        "data_size": [512, 2048, 8192, 32000],
+        "data_dir": ["compressed_data"]
+      },
+      "jobs": [
+        {
+          "id": "lz4-none",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 2,
+          "params": { 
+            "burst_size": [64],
+            "algorithm": "lz4",
+            "checksum": "none"
+          },
+          "eal_args_merge": ["--file-prefix", "lz4_none"],
+          "iteration_multiplier": 1.0
+        },
+        {
+          "id": "lz4-xxhash32",
+          "function": "rte_compressdev_enqueue_dequeue_burst_decompress",
+          "inherit": true,
+          "cpu_core": 3,
+          "params": { 
+            "burst_size": [64],
+            "algorithm": "lz4",
+            "checksum": "xxhash32"
+          },
+          "eal_args_merge": ["--file-prefix", "lz4_hash"],
+          "iteration_multiplier": 1.0
+        }
+      ]
+    }
+  ]
+}

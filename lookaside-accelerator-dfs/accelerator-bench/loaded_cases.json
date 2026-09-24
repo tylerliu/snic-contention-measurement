@@ -1,0 +1,19 @@
+{
+  "rte_cryptodev_enqueue_dequeue_burst_xts_decrypt": {
+    "params": {
+      "burst_size": [64],
+      "data_size": [32000],
+      "num_queues": [3],
+      "pause_loops": [
+        100,
+        400,
+        1600,
+        6400,
+        25600,
+        102400,
+        409600
+      ]
+    },
+    "eal_args": ["-a", "03:00.0,class=crypto,algo=0"]
+  }
+}

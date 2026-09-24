@@ -1,0 +1,23 @@
+#
+# Sample NICFS configuration for the new YAML parser.
+#
+program_flags:
+  pci: "03:00.0"
+  listen-port: 8080
+  ibv-device: "mlx5_2"
+  replicas: 
+    - nic_tester
+  cores: 
+    - 3-7
+    - 8
+    - 9
+    - 10
+    - 11
+  track-pauses: true
+  log-encryption: aes-xts # options: aes-xts, aes-gcm, none
+  log-level: INFO
+
+dpdk_args:
+  # Example of passing an allowlist via YAML mapping
+  devices:
+    - "03:00.0,class=crypto,algo=0"

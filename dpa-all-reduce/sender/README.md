@@ -1,0 +1,7 @@
+# DPA traffic generator
+
+Generates IPv4/UDP packets with broadcast Ethernet destination and repeated-byte payloads. `-p` sets destination port, `-z` sets UDP payload bytes, `-i` sets destination IP, `-m` sets source MAC, `-t` selects DPA threads, `-a` selects ARM-backed send data, and `-k` sets shared SQ packet count. `-s` is parsed but ignored; source ports are assigned from thread IDs. For the required 1.5 MiB total storage, use `-k 768`: each shared packet slot reserves 2048 bytes. Keep this total fixed during thread sweeps. Sustained sending and ConnectX-7 NIC-mode execution still require validation.
+
+The send WQE requests hardware IPv4-header checksum offload through `flexio_dev_swqe_seg_eth_set(swqe, 1 << 14, 0, 0, NULL)`: bit 14 is `FLEXIO_ETH_SEG_L3CS` (`0x4000`). UDP checksum offload is disabled and its checksum field stays zero. Retain the offload setting and validate the emitted IPv4 checksum in captured packets; the requested offload alone does not establish that the resulting checksum is valid.
+
+Follow the [reproduction guide](../README.md) for DOCA 3.1 container setup, builds, launch commands, correctness checks, firmware/runtime troubleshooting, and measurement limits. Use existing code unless a demonstrated blocker requires a minimal, documented change, and keep changed-code results separate. Each FlexIO project builds its own `build-doca31/host/flexio_packet_processor`. Native execution requires matching SDK libraries; use the shared [DOCA 3.1 Docker setup](../../README.md#doca-31-docker-setup) for both build and runtime.
